@@ -1,0 +1,46 @@
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 17:35:02 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //单个数码管0-9显示
+   2          //单个共阳数码管在P0口以及74hc573芯片驱动下，循环显示0-9
+   3          //河南科技学院-单片机协会，2016年10月9日                 
+   4          #include<reg51.h>
+   5          sbit P3_0 = P3^0;
+   6          unsigned char cp;
+   7          code unsigned char seven_seg[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};//数字0~9的显示方法
+   8          void delay(unsigned int x)
+   9          {
+  10   1              while(x--);
+  11   1      }
+  12          void main(void)
+  13          {
+  14   1              P0 = 0x01;
+  15   1              P3_0 = 0;P3_0 = 1;P3_0 = 0;//P3.0输出上升沿，使74HC573锁存,     Q0输出高电平； 
+  16   1              while(1)                        
+  17   1              {       
+  18   2                      P0 = seven_seg[cp];
+  19   2                      delay(50000);
+  20   2                      cp++;                           //cp每次加1
+  21   2                      if(cp >= 10)cp = 0;     //到10清零      
+  22   2              }
+  23   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     49    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

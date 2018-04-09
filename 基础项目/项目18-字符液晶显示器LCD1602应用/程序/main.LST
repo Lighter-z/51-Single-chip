@@ -1,0 +1,48 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              10/23/2017 10:46:56 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          #include<LCD1602.c>
+   5          void main()
+   6          {
+   7   1        uchar i,sec = 56;
+   8   1        FLCD1602_init();
+   9   1        FLCD1602_clear();
+  10   1        while(1)
+  11   1        {
+  12   2          FLCD1602_clear();
+  13   2          display_string("How are you");
+  14   2          gotoxy(2,0);
+  15   2          display_string("dat:2012/09/01");
+  16   2          delay(50000);delay(50000);delay(50000);delay(50000);
+  17   2          FLCD1602_clear();
+  18   2          display_string("Time:");display_num(sec);display_string(" ");display_num(i);
+  19   2          gotoxy(2,0);
+  20   2          display_string("end");
+  21   2          delay(50000);delay(50000);delay(50000);delay(50000);
+  22   2          i++;
+  23   2          if(i>100)i = 0;
+  24   2        }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    265    ----
+   CONSTANT SIZE    =     39    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

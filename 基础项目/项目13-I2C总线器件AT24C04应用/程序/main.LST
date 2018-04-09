@@ -1,0 +1,44 @@
+C51 COMPILER V9.00   MAIN                                                                  05/14/2017 20:36:50 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\安装目录\keil4\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<AT24C04.c>
+   3          void delay(unsigned int x )
+   4          {
+   5   1              while(x--);
+   6   1      }
+   7          void main()
+   8          {
+   9   1              init_24c04();                                            //I2总线初始化函数
+  10   1              while(1)
+  11   1              {
+  12   2                      write_add_dat_24c04(1,0x0f);     //写入地址1，保存数据0x0f
+  13   2                      delay(300);                                              //延时
+  14   2                      write_add_dat_24c04(2,0xf0);     //写入地址二，保存数据0xf0
+  15   2                      delay(300);                                              //延时
+  16   2                      P0 = read_add_dat_24c04(1);              //读地址1，保存数据0x0f，并显示
+  17   2                      delay(50000);                                    //延时
+  18   2                      P0 = read_add_dat_24c04(2);              //读地址二，保存数据0xf0，并显示
+  19   2                      delay(50000);                                    //延时
+  20   2              }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    224    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

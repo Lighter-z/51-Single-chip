@@ -1,0 +1,210 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        08/31/2017  17:38:28  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO DA转换TLC5615应用
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  E:\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  E:\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  E:\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  DA转换TLC5615应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0228H     UNIT         ?C?LIB_CODE
+            CODE    0A28H     0107H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0B2FH     0028H     UNIT         ?PR?_TLC5615?MAIN
+            CODE    0B57H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0B67H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0B73H     000AH     UNIT         ?CO?MAIN
+            CODE    0B7DH     0007H     UNIT         ?PR?TLC5615_INIT?MAIN
+            CODE    0B84H     0005H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   DA转换TLC5615应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0_ISR?MAIN
+  +--> ?PR?_TLC5615?MAIN
+  +--> ?CO?MAIN
+
+?PR?_TLC5615?MAIN
+  +--> ?PR?TLC5615_INIT?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/31/2017  17:38:28  PAGE 2
+
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  DA转换TLC5615应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0A28H         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+  D:0009H         PUBLIC        cp2
+  B:00A8H.7       PUBLIC        EA
+  C:0B2FH         PUBLIC        _tlc5615
+  C:0B84H         PUBLIC        main
+  C:0B7DH         PUBLIC        tlc5615_init
+  D:000AH         PUBLIC        moni
+  D:0089H         PUBLIC        TMOD
+  D:000CH         PUBLIC        dat
+  B:0090H.5       PUBLIC        din
+  B:0090H.1       PUBLIC        scl
+  C:0B73H         PUBLIC        seven_seg
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0090H.6       PUBLIC        cs
+  B:0088H.4       PUBLIC        TR0
+  C:0B57H         PUBLIC        timer0_init
+  -------         PROC          TLC5615_INIT
+  C:0B7DH         LINE#         5
+  C:0B7DH         LINE#         6
+  C:0B7DH         LINE#         7
+  C:0B7FH         LINE#         8
+  C:0B81H         LINE#         9
+  C:0B83H         LINE#         10
+  -------         ENDPROC       TLC5615_INIT
+  -------         PROC          _TLC5615
+  D:0006H         SYMBOL        dat
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:0B2FH         LINE#         12
+  C:0B2FH         LINE#         13
+  C:0B2FH         LINE#         15
+  C:0B3AH         LINE#         16
+  C:0B3DH         LINE#         17
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/31/2017  17:38:28  PAGE 3
+
+
+  C:0B3FH         LINE#         18
+  C:0B3FH         LINE#         19
+  C:0B43H         LINE#         20
+  C:0B45H         LINE#         21
+  C:0B4CH         LINE#         22
+  C:0B4EH         LINE#         23
+  C:0B52H         LINE#         24
+  C:0B54H         LINE#         25
+  C:0B56H         LINE#         26
+  -------         ENDPROC       _TLC5615
+  -------         PROC          TIMER0_INIT
+  C:0B57H         LINE#         8
+  C:0B57H         LINE#         9
+  C:0B57H         LINE#         10
+  C:0B5AH         LINE#         11
+  C:0B5DH         LINE#         12
+  C:0B60H         LINE#         13
+  C:0B62H         LINE#         14
+  C:0B64H         LINE#         15
+  C:0B66H         LINE#         16
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0_ISR
+  C:0A28H         LINE#         17
+  C:0A45H         LINE#         19
+  C:0A48H         LINE#         20
+  C:0A4BH         LINE#         21
+  C:0A4DH         LINE#         22
+  C:0A58H         LINE#         23
+  C:0A58H         LINE#         24
+  C:0A5BH         LINE#         25
+  C:0A62H         LINE#         26
+  C:0A6DH         LINE#         27
+  C:0A73H         LINE#         28
+  C:0A8DH         LINE#         29
+  C:0A98H         LINE#         30
+  C:0A98H         LINE#         31
+  C:0A9BH         LINE#         32
+  C:0AA7H         LINE#         33
+  C:0AA7H         LINE#         34
+  C:0AC5H         LINE#         35
+  C:0AEAH         LINE#         36
+  C:0B08H         LINE#         37
+  C:0B08H         LINE#         38
+  C:0B0AH         LINE#         39
+  C:0B11H         LINE#         40
+  C:0B14H         LINE#         41
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          MAIN
+  C:0B84H         LINE#         42
+  C:0B84H         LINE#         43
+  C:0B84H         LINE#         44
+  C:0B87H         LINE#         45
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?FPMUL
+  C:0800H         PUBLIC        ?C?FPMUL
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/31/2017  17:38:28  PAGE 4
+
+
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FCAST
+  C:0910H         PUBLIC        ?C?FCASTC
+  C:090BH         PUBLIC        ?C?FCASTI
+  C:0906H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0944H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?UIDIV
+  C:09C5H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?LNEG
+  C:0A1AH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0158H BYTE (16%) *
+******************************************************************************
+
+Program Size: data=15.0 xdata=0 code=911
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

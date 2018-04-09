@@ -1,0 +1,48 @@
+C51 COMPILER V8.02   MAIN                                                                  01/17/2016 17:54:37 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //AT24C04应用，教材和B105型实验开发板通用
+   2          //读取并且存储地址，
+   3          //设计：单片机创新工作室--齐霄涵设计，2015年12月15日
+   4          #include<reg51.h>                                                               //头文件
+   5          #include<at24c04.c>                                                             //包含AT24C04驱动的头文件
+   6          #define uint unsigned int
+   7          void delay(uint x)
+   8          {
+   9   1              while(x--);
+  10   1      }
+  11          void main(void)
+  12          {
+  13   1              init_2404();                                                       //AT24C04驱动
+  14   1              while(1)
+  15   1              {
+  16   2                      write_add_dat_2404(1,0x0f);                        //地址1保存0x0f
+  17   2                      delay(300);
+  18   2                      write_add_dat_2404(2,0xf0);                        //地址2保存0xf0
+  19   2                      delay(300);
+  20   2                      P0 = read_add_dat_2404(1);                         //读地址1保存0x0f，并在P0口显示
+  21   2                      delay(50000);
+  22   2                      P0 = read_add_dat_2404(2);                         //读地址2保存0xf0，并在P0口显示
+  23   2                      delay(50000);
+  24   2              }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    217    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,274 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        07/23/2008  18:36:01  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO 数字温度传感器DS18B20应用
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  数字温度传感器DS18B20应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         ?DT?MAIN
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     01D3H     UNIT         ?C?LIB_CODE
+            CODE    09D3H     007BH     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0A4EH     003DH     UNIT         ?PR?READ_TEMPERATURE?MAIN
+            CODE    0A8BH     002DH     UNIT         ?PR?MAIN?MAIN
+            CODE    0AB8H     0020H     UNIT         ?PR?_WRITE_ONECHAR?MAIN
+            CODE    0AD8H     001FH     UNIT         ?PR?INIT_DS18B20?MAIN
+            CODE    0AF7H     001EH     UNIT         ?PR?READ_ONECHAR?MAIN
+            CODE    0B15H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0B25H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0B31H     000BH     UNIT         ?PR?_DELAY?MAIN
+            CODE    0B3CH     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   数字温度传感器DS18B20应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0_ISR?MAIN
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/23/2008  18:36:01  PAGE 2
+
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?PR?READ_TEMPERATURE?MAIN
+
+?PR?READ_TEMPERATURE?MAIN
+  +--> ?PR?INIT_DS18B20?MAIN
+  +--> ?PR?_WRITE_ONECHAR?MAIN
+  +--> ?PR?READ_ONECHAR?MAIN
+
+?PR?INIT_DS18B20?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_WRITE_ONECHAR?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?READ_ONECHAR?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  数字温度传感器DS18B20应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:0AF7H         PUBLIC        Read_OneChar
+  D:00B0H         PUBLIC        P3
+  C:09D3H         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+  B:00A8H.7       PUBLIC        EA
+  B:00B0H.0       PUBLIC        P3_0
+  B:0090H.2       PUBLIC        DQ
+  C:0AD8H         PUBLIC        Init_DS18B20
+  C:0A8BH         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  C:0B3CH         PUBLIC        seven_seg
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:0009H         PUBLIC        cp
+  B:0088H.4       PUBLIC        TR0
+  D:000BH         PUBLIC        a
+  D:000CH         PUBLIC        b
+  D:000DH         PUBLIC        c
+  C:0B15H         PUBLIC        timer0_init
+  C:0B31H         PUBLIC        _delay
+  C:0AB8H         PUBLIC        _Write_OneChar
+  D:000EH         PUBLIC        t
+  C:0A4EH         PUBLIC        Read_Temperature
+  -------         PROC          _DELAY
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/23/2008  18:36:01  PAGE 3
+
+
+  D:0006H         SYMBOL        x
+  C:0B31H         LINE#         6
+  C:0B31H         LINE#         7
+  C:0B31H         LINE#         8
+  C:0B3BH         LINE#         9
+  -------         ENDPROC       _DELAY
+  -------         PROC          INIT_DS18B20
+  -------         DO            
+  D:0005H         SYMBOL        x
+  -------         ENDDO         
+  C:0AD8H         LINE#         11
+  C:0AD8H         LINE#         12
+  C:0AD8H         LINE#         13
+  C:0ADAH         LINE#         14
+  C:0ADCH         LINE#         15
+  C:0ADEH         LINE#         16
+  C:0AE5H         LINE#         17
+  C:0AE7H         LINE#         18
+  C:0AF0H         LINE#         19
+  -------         ENDPROC       INIT_DS18B20
+  -------         PROC          READ_ONECHAR
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0003H         SYMBOL        dat
+  -------         ENDDO         
+  C:0AF7H         LINE#         22
+  C:0AF7H         LINE#         23
+  C:0AF7H         LINE#         24
+  C:0AF8H         LINE#         25
+  C:0AF9H         LINE#         26
+  C:0AFBH         LINE#         27
+  C:0AFBH         LINE#         28
+  C:0AFDH         LINE#         29
+  C:0B01H         LINE#         30
+  C:0B03H         LINE#         31
+  C:0B09H         LINE#         32
+  C:0B10H         LINE#         33
+  C:0B12H         LINE#         34
+  C:0B14H         LINE#         35
+  -------         ENDPROC       READ_ONECHAR
+  -------         PROC          _WRITE_ONECHAR
+  D:0005H         SYMBOL        dat
+  -------         DO            
+  D:0003H         SYMBOL        i
+  -------         ENDDO         
+  C:0AB8H         LINE#         37
+  C:0ABAH         LINE#         38
+  C:0ABAH         LINE#         39
+  C:0ABAH         LINE#         40
+  C:0ABCH         LINE#         41
+  C:0ABCH         LINE#         42
+  C:0ABEH         LINE#         43
+  C:0AC2H         LINE#         44
+  C:0AC9H         LINE#         45
+  C:0ACBH         LINE#         46
+  C:0ACFH         LINE#         47
+  C:0AD1H         LINE#         48
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/23/2008  18:36:01  PAGE 4
+
+
+  -------         ENDPROC       _WRITE_ONECHAR
+  -------         PROC          READ_TEMPERATURE
+  C:0A4EH         LINE#         51
+  C:0A4EH         LINE#         52
+  C:0A4EH         LINE#         53
+  C:0A51H         LINE#         54
+  C:0A56H         LINE#         55
+  C:0A5BH         LINE#         57
+  C:0A5EH         LINE#         58
+  C:0A63H         LINE#         59
+  C:0A68H         LINE#         60
+  C:0A6DH         LINE#         61
+  C:0A72H         LINE#         62
+  C:0A78H         LINE#         63
+  C:0A7FH         LINE#         64
+  C:0A86H         LINE#         65
+  C:0A8AH         LINE#         66
+  -------         ENDPROC       READ_TEMPERATURE
+  -------         PROC          TIMER0_INIT
+  C:0B15H         LINE#         11
+  C:0B15H         LINE#         12
+  C:0B15H         LINE#         13
+  C:0B18H         LINE#         14
+  C:0B1BH         LINE#         15
+  C:0B1EH         LINE#         16
+  C:0B20H         LINE#         17
+  C:0B22H         LINE#         18
+  C:0B24H         LINE#         19
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0_ISR
+  C:09D3H         LINE#         20
+  C:09DDH         LINE#         22
+  C:09E0H         LINE#         23
+  C:09E3H         LINE#         24
+  C:09EBH         LINE#         25
+  C:09EEH         LINE#         26
+  C:09FAH         LINE#         27
+  C:09FAH         LINE#         28
+  C:0A03H         LINE#         29
+  C:0A07H         LINE#         30
+  C:0A10H         LINE#         31
+  C:0A22H         LINE#         32
+  C:0A2BH         LINE#         33
+  C:0A37H         LINE#         34
+  C:0A37H         LINE#         35
+  C:0A43H         LINE#         36
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          MAIN
+  C:0A8BH         LINE#         37
+  C:0A8BH         LINE#         38
+  C:0A8BH         LINE#         39
+  C:0A8EH         LINE#         40
+  C:0A8EH         LINE#         41
+  C:0A8EH         LINE#         42
+  C:0A99H         LINE#         43
+  C:0A99H         LINE#         44
+  C:0A9EH         LINE#         45
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/23/2008  18:36:01  PAGE 5
+
+
+  C:0AA1H         LINE#         46
+  C:0AB6H         LINE#         47
+  C:0AB6H         LINE#         48
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?FPMUL
+  C:0800H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FCAST
+  C:0910H         PUBLIC        ?C?FCASTC
+  C:090BH         PUBLIC        ?C?FCASTI
+  C:0906H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0944H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?LNEG
+  C:09C5H         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 016AH BYTE (17%) *
+******************************************************************************
+
+Program Size: data=16.0 xdata=0 code=844
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

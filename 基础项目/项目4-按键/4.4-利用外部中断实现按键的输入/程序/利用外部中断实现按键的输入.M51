@@ -1,0 +1,90 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/07/2017  18:48:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\安装目录\KEIL4\C51\BIN\BL51.EXE 利用外部中断实现按键的输入.obj TO 利用外部中断实现按键的输入
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  利用外部中断实现按键的输入.obj (利用蚠部_卸鲜迪__醇氖_入)
+  D:\安装目录\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  利用外部中断实现按键的输入 (利用蚠部_卸鲜迪__醇氖_入)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0012H     0007H     UNIT         ?PR?IT0_INIT?利用蚠部_卸鲜迪__醇氖_入
+            CODE    0019H     0005H     UNIT         ?PR?MAIN?利用蚠部_卸鲜迪__醇氖_入
+            CODE    001EH     0003H     UNIT         ?PR?IT0_ISR?利用蚠部_卸鲜迪__醇氖_入
+
+
+
+OVERLAY MAP OF MODULE:   利用外部中断实现按键的输入 (利用蚠部_卸鲜迪__醇氖_入)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?利用蚠部_卸鲜迪__醇氖_入
+
+?PR?MAIN?利用蚠部_卸鲜迪__醇氖_入
+  +--> ?PR?IT0_INIT?利用蚠部_卸鲜迪__醇氖_入
+
+
+
+SYMBOL TABLE OF MODULE:  利用外部中断实现按键的输入 (利用蚠部_卸鲜迪__醇氖_入)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        利用蚠部_卸鲜迪__醇氖_入
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  C:0012H         PUBLIC        it0_init
+  C:0019H         PUBLIC        main
+  B:00A0H.0       PUBLIC        led
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/07/2017  18:48:44  PAGE 2
+
+
+  C:001EH         PUBLIC        it0_isr
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  -------         PROC          IT0_ISR
+  C:001EH         LINE#         3
+  C:001EH         LINE#         5
+  C:0020H         LINE#         6
+  -------         ENDPROC       IT0_ISR
+  -------         PROC          IT0_INIT
+  C:0012H         LINE#         7
+  C:0012H         LINE#         8
+  C:0012H         LINE#         9
+  C:0014H         LINE#         10
+  C:0016H         LINE#         11
+  C:0018H         LINE#         12
+  -------         ENDPROC       IT0_INIT
+  -------         PROC          MAIN
+  C:0019H         LINE#         13
+  C:0019H         LINE#         14
+  C:0019H         LINE#         15
+  C:001CH         LINE#         16
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        利用蚠部_卸鲜迪__醇氖_入
+
+Program Size: data=9.0 xdata=0 code=33
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

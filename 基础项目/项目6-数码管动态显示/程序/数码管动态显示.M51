@@ -1,0 +1,111 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/13/2017  19:54:43  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\安装目录\KEIL4\C51\BIN\BL51.EXE main.obj TO 数码管动态显示
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  D:\安装目录\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  数码管动态显示 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0076H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    0079H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0085H     000AH     UNIT         ?PR?MAIN?MAIN
+            CODE    008FH     000AH     UNIT         ?CO?MAIN
+            CODE    0099H     0007H     UNIT         ?PR?_DELAY?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   数码管动态显示 (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?DISPLAY?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?DISPLAY?MAIN               0008H    0001H
+  +--> ?CO?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  数码管动态显示 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/13/2017  19:54:43  PAGE 2
+
+
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  B:0090H.0       PUBLIC        P1_0
+  C:0099H         PUBLIC        _delay
+  C:0085H         PUBLIC        main
+  C:008FH         PUBLIC        seven_seg
+  C:0003H         PUBLIC        display
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        x
+  C:0099H         LINE#         5
+  C:0099H         LINE#         6
+  C:0099H         LINE#         7
+  C:009FH         LINE#         8
+  -------         ENDPROC       _DELAY
+  -------         PROC          DISPLAY
+  -------         DO            
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         9
+  C:0003H         LINE#         10
+  C:0003H         LINE#         12
+  C:0006H         LINE#         13
+  C:001BH         LINE#         14
+  C:001BH         LINE#         15
+  C:0024H         LINE#         16
+  C:0032H         LINE#         17
+  C:0040H         LINE#         18
+  C:004EH         LINE#         19
+  C:005CH         LINE#         20
+  C:006CH         LINE#         21
+  C:006CH         LINE#         22
+  C:006EH         LINE#         23
+  C:0078H         LINE#         24
+  -------         ENDPROC       DISPLAY
+  -------         PROC          MAIN
+  C:0085H         LINE#         25
+  C:0085H         LINE#         26
+  C:0085H         LINE#         27
+  C:0085H         LINE#         28
+  C:0085H         LINE#         29
+  C:0088H         LINE#         30
+  C:008DH         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=10.0 xdata=0 code=160
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

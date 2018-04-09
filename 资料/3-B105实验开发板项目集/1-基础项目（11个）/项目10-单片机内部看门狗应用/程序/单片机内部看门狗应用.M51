@@ -1,0 +1,85 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/09/2016  20:23:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO 单片机内部看门狗应用
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  单片机内部看门狗应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0017H     UNIT         ?PR?MAIN?MAIN
+            CODE    001AH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0026H     000BH     UNIT         ?PR?_DELAY?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   单片机内部看门狗应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  单片机内部看门狗应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0026H         PUBLIC        _delay
+  C:0003H         PUBLIC        main
+  B:0080H.0       PUBLIC        LED
+  D:00E1H         PUBLIC        WDT_CONTR
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2016  20:23:47  PAGE 2
+
+
+  C:0026H         LINE#         9
+  C:0026H         LINE#         10
+  C:0026H         LINE#         11
+  C:0030H         LINE#         12
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0003H         LINE#         13
+  C:0003H         LINE#         14
+  C:0003H         LINE#         15
+  C:0006H         LINE#         16
+  C:0006H         LINE#         17
+  C:0006H         LINE#         19
+  C:0008H         LINE#         20
+  C:000FH         LINE#         21
+  C:0011H         LINE#         22
+  C:0018H         LINE#         23
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=49
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

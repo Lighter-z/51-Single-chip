@@ -1,0 +1,51 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 10:50:14 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //利用按键调整数码管的数值，针对教材设计
+   2          //两个按键，分别控制加和减
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<key.c>
+   6          sbit P1_0 = P1^0;
+   7          unsigned char k;
+   8          code unsigned char seven_seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+   9          void display()                          //显示函数
+  10          {
+  11   1              P0 = 0xff;
+  12   1              switch(k)
+  13   1              {
+  14   2                      case 0:P0 = 0x01;P1_0 = 0;P1_0 = 1;P1_0 = 0;P0 = seven_seg[i % 10];break;
+  15   2                      case 1:P0 = 0x02;P1_0 = 0;P1_0 = 1;P1_0 = 0;P0 = seven_seg[i / 10];break;
+  16   2              }
+  17   1              k++;
+  18   1              if(k > 1) k = 0;
+  19   1      }
+  20          void main()
+  21          {
+  22   1              while(1)
+  23   1              {
+  24   2                      key_scan();                     //调用按键函数
+  25   2                      display();                      //调用显示函数
+  26   2                      delay(300);                     
+  27   2              }
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    139    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

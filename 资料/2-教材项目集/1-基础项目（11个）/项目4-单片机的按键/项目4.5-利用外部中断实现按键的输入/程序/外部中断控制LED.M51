@@ -1,0 +1,91 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  10:52:06  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 外部中断控制LED
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  外部中断控制LED (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0012H     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    001AH     0007H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0021H     0003H     UNIT         ?PR?TIMER0_ISR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   外部中断控制LED (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  外部中断控制LED (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0021H         PUBLIC        timer0_isr
+  B:00A8H.7       PUBLIC        EA
+  C:0012H         PUBLIC        main
+  B:00A8H.0       PUBLIC        EX0
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  10:52:06  PAGE 2
+
+
+  B:0088H.0       PUBLIC        IT0
+  B:0080H.0       PUBLIC        LED
+  C:001AH         PUBLIC        timer0_init
+  -------         PROC          TIMER0_ISR
+  C:0021H         LINE#         6
+  C:0021H         LINE#         8
+  C:0023H         LINE#         9
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:001AH         LINE#         10
+  C:001AH         LINE#         11
+  C:001AH         LINE#         12
+  C:001CH         LINE#         13
+  C:001EH         LINE#         14
+  C:0020H         LINE#         15
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:0012H         LINE#         16
+  C:0012H         LINE#         17
+  C:0012H         LINE#         18
+  C:0015H         LINE#         19
+  C:0018H         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=36
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

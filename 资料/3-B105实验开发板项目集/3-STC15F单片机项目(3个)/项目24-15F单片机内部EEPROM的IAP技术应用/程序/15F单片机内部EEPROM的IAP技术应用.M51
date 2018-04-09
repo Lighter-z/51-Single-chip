@@ -1,0 +1,310 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  12:30:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 15F单片机内部EEPROM的IAP技术应用
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  15F单片机内部EEPROM的IAP技术应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         ?DT?MAIN
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0007H     UNIT         ?XD?MAIN
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0004H     UNIT         ?PR?_READ_DAT_1B?MAIN
+                    0007H     0004H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     00A7H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    00B5H     0092H     UNIT         ?PR?MAIN?MAIN
+            CODE    0147H     008CH     UNIT         ?C_C51STARTUP
+            CODE    01D3H     0059H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    022CH     0017H     UNIT         ?PR?_IAP_READBYTE?MAIN
+            CODE    0243H     0016H     UNIT         ?PR?_IAP_WRITEBYTE?MAIN
+            CODE    0259H     0014H     UNIT         ?PR?_IAP_ERASESECTOR?MAIN
+            CODE    026DH     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    027DH     000DH     UNIT         ?PR?IAP_IDLE?MAIN
+            CODE    028AH     000DH     UNIT         ?C_INITSEG
+            CODE    0297H     000AH     UNIT         ?PR?_SAVE_DAT_1B?MAIN
+            CODE    02A1H     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   15F单片机内部EEPROM的IAP技术应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0_ISR?MAIN
+  +--> ?PR?DISPLAY?MAIN
+
+?PR?DISPLAY?MAIN
+  +--> ?CO?MAIN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:39  PAGE 2
+
+
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?PR?_IAP_READBYTE?MAIN
+  +--> ?PR?_READ_DAT_1B?MAIN
+  +--> ?PR?_SAVE_DAT_1B?MAIN
+  +--> ?PR?_IAP_ERASESECTOR?MAIN
+  +--> ?PR?_IAP_WRITEBYTE?MAIN
+
+?PR?_IAP_READBYTE?MAIN
+  +--> ?PR?IAP_IDLE?MAIN
+
+?PR?_READ_DAT_1B?MAIN
+  +--> ?PR?_IAP_READBYTE?MAIN
+
+?PR?_SAVE_DAT_1B?MAIN
+  +--> ?PR?_IAP_ERASESECTOR?MAIN
+  +--> ?PR?_IAP_WRITEBYTE?MAIN
+
+?PR?_IAP_ERASESECTOR?MAIN
+  +--> ?PR?IAP_IDLE?MAIN
+
+?PR?_IAP_WRITEBYTE?MAIN
+  +--> ?PR?IAP_IDLE?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  15F单片机内部EEPROM的IAP技术应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  X:0000H         PUBLIC        sec_c
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:0259H         PUBLIC        _IAP_EraseSector
+  X:0001H         PUBLIC        hour_c
+  C:01D3H         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+  D:000AH         PUBLIC        cp2
+  B:00A8H.7       PUBLIC        EA
+  D:000BH         PUBLIC        cp3
+  X:0002H         PUBLIC        min_c
+  C:0003H         PUBLIC        _read_dat_1b
+  D:00C5H         PUBLIC        IAP_CMD
+  X:0003H         PUBLIC        flash
+  B:0090H.0       PUBLIC        P1_0
+  C:0297H         PUBLIC        _save_dat_1b
+  D:00C3H         PUBLIC        IAP_ADDRH
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:39  PAGE 3
+
+
+  D:00C4H         PUBLIC        IAP_ADDRL
+  C:00B5H         PUBLIC        main
+  C:022CH         PUBLIC        _IAP_ReadByte
+  D:0089H         PUBLIC        TMOD
+  C:027DH         PUBLIC        IAP_Idle
+  X:0004H         PUBLIC        sec
+  C:0243H         PUBLIC        _IAP_WriteByte
+  X:0005H         PUBLIC        hour
+  D:00C7H         PUBLIC        IAP_CONTR
+  X:0006H         PUBLIC        min
+  C:02A1H         PUBLIC        seven_seg
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:00C2H         PUBLIC        IAP_DATA
+  B:0088H.4       PUBLIC        TR0
+  C:026DH         PUBLIC        timer0_init
+  D:00C6H         PUBLIC        IAP_TRIG
+  C:000EH         PUBLIC        display
+  -------         PROC          DISPLAY
+  C:000EH         LINE#         7
+  C:000EH         LINE#         8
+  C:000EH         LINE#         9
+  C:0037H         LINE#         10
+  C:0037H         LINE#         11
+  C:0040H         LINE#         12
+  C:0045H         LINE#         13
+  C:004EH         LINE#         14
+  C:0053H         LINE#         15
+  C:0058H         LINE#         16
+  C:005AH         LINE#         17
+  C:0063H         LINE#         18
+  C:0068H         LINE#         19
+  C:0071H         LINE#         20
+  C:0076H         LINE#         21
+  C:007FH         LINE#         22
+  C:0088H         LINE#         23
+  C:0091H         LINE#         24
+  C:009DH         LINE#         25
+  C:00A6H         LINE#         26
+  C:00B4H         LINE#         28
+  C:00B4H         LINE#         30
+  -------         ENDPROC       DISPLAY
+  -------         PROC          IAP_IDLE
+  C:027DH         LINE#         28
+  C:027DH         LINE#         29
+  C:027DH         LINE#         30
+  C:0280H         LINE#         31
+  C:0282H         LINE#         32
+  C:0284H         LINE#         33
+  C:0287H         LINE#         34
+  C:0289H         LINE#         35
+  -------         ENDPROC       IAP_IDLE
+  -------         PROC          _IAP_READBYTE
+  D:0006H         SYMBOL        addr
+  -------         DO            
+  D:0007H         SYMBOL        x
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:39  PAGE 4
+
+
+  -------         ENDDO         
+  C:022CH         LINE#         36
+  C:022CH         LINE#         37
+  C:022CH         LINE#         39
+  C:022FH         LINE#         40
+  C:0232H         LINE#         41
+  C:0234H         LINE#         42
+  C:0236H         LINE#         43
+  C:0239H         LINE#         44
+  C:023CH         LINE#         45
+  C:023DH         LINE#         46
+  C:023FH         LINE#         47
+  C:0242H         LINE#         48
+  C:0242H         LINE#         49
+  -------         ENDPROC       _IAP_READBYTE
+  -------         PROC          _IAP_WRITEBYTE
+  D:0006H         SYMBOL        addr
+  D:0005H         SYMBOL        x
+  C:0243H         LINE#         50
+  C:0243H         LINE#         51
+  C:0243H         LINE#         52
+  C:0246H         LINE#         53
+  C:0249H         LINE#         54
+  C:024BH         LINE#         55
+  C:024DH         LINE#         56
+  C:024FH         LINE#         57
+  C:0252H         LINE#         58
+  C:0255H         LINE#         59
+  C:0256H         LINE#         60
+  -------         ENDPROC       _IAP_WRITEBYTE
+  -------         PROC          _IAP_ERASESECTOR
+  D:0006H         SYMBOL        addr
+  C:0259H         LINE#         62
+  C:0259H         LINE#         63
+  C:0259H         LINE#         64
+  C:025CH         LINE#         65
+  C:025FH         LINE#         66
+  C:0261H         LINE#         67
+  C:0263H         LINE#         68
+  C:0266H         LINE#         69
+  C:0269H         LINE#         70
+  C:026AH         LINE#         71
+  -------         ENDPROC       _IAP_ERASESECTOR
+  -------         PROC          _SAVE_DAT_1B
+  D:0002H         SYMBOL        x1
+  D:0005H         SYMBOL        x2
+  C:0297H         LINE#         73
+  C:029BH         LINE#         74
+  C:029BH         LINE#         75
+  C:029EH         LINE#         76
+  -------         ENDPROC       _SAVE_DAT_1B
+  -------         PROC          _READ_DAT_1B
+  D:0006H         SYMBOL        x
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         102
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:39  PAGE 5
+
+
+  C:0003H         LINE#         103
+  C:0003H         LINE#         105
+  C:0006H         LINE#         106
+  C:0006H         LINE#         107
+  -------         ENDPROC       _READ_DAT_1B
+  -------         PROC          TIMER0_ISR
+  C:01D3H         LINE#         11
+  C:01E2H         LINE#         13
+  C:01E5H         LINE#         14
+  C:01E8H         LINE#         15
+  C:01F0H         LINE#         16
+  C:01F9H         LINE#         17
+  C:01F9H         LINE#         18
+  C:01FFH         LINE#         19
+  C:0207H         LINE#         20
+  C:020DH         LINE#         21
+  C:020DH         LINE#         22
+  C:0210H         LINE#         23
+  C:0213H         LINE#         24
+  C:0215H         LINE#         25
+  C:021FH         LINE#         26
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:026DH         LINE#         27
+  C:026DH         LINE#         28
+  C:026DH         LINE#         29
+  C:0270H         LINE#         30
+  C:0273H         LINE#         31
+  C:0276H         LINE#         32
+  C:0278H         LINE#         33
+  C:027AH         LINE#         34
+  C:027CH         LINE#         35
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:00B5H         LINE#         36
+  C:00B5H         LINE#         37
+  C:00B5H         LINE#         38
+  C:00B8H         LINE#         39
+  C:00C4H         LINE#         40
+  C:00CEH         LINE#         41
+  C:00DAH         LINE#         42
+  C:00DAH         LINE#         43
+  C:00DAH         LINE#         44
+  C:00E5H         LINE#         45
+  C:00E5H         LINE#         46
+  C:00EAH         LINE#         47
+  C:00F0H         LINE#         49
+  C:00FDH         LINE#         50
+  C:010EH         LINE#         51
+  C:0119H         LINE#         52
+  C:0122H         LINE#         55
+  C:0125H         LINE#         56
+  C:012DH         LINE#         57
+  C:0132H         LINE#         58
+  C:0138H         LINE#         59
+  C:013DH         LINE#         60
+  C:0145H         LINE#         61
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:39  PAGE 6
+
+
+  C:0145H         LINE#         62
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=14.0 xdata=7 code=679
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,65 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 12:30:06 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //学习PWM波的占空比设定,针对B105型实验开发板设计
+   2          //15F单片机内部有3个PWM模块，利用编程的方法可以改变,利用模块0产生一个PWM波，从P1.1输出接示波器观察；
+   3          //设计：单片机创新工作室--冷恩鑫设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<15fpwm.c>
+   6          unsigned char cp1,cp2,pwm_num;
+   7          xdata pwm_s;//占空比,占空间16位
+   8          void timer0_isr(void) interrupt 1
+   9          {
+  10   1              TH0 =  (65536 - 1000) / 256;
+  11   1              TL0 =  (65536 - 1000) % 256;
+  12   1              cp1++;
+  13   1              if(cp1 >= 100)//0.1毫秒
+  14   1              {
+  15   2                      pwm_num++;
+  16   2                      if(pwm_num >= 256)pwm_num = 0;
+  17   2                      cp1 = 0;
+  18   2              }               
+  19   1      }
+  20          void timer0_init(void)
+  21          {
+  22   1              TMOD = 0x01;
+  23   1              TH0 =  (65536 - 1000) / 256;
+  24   1              TL0 =  (65536 - 1000) % 256;
+  25   1              EA = 1;
+  26   1              ET0 = 1;
+  27   1              TR0 = 1;
+  28   1      }
+  29          void main(void)
+  30          {
+  31   1              timer0_init();
+  32   1              STC_pwm_init();
+  33   1              while(1)
+  34   1              {
+  35   2                      if(CL >= 0xfe)//PC计数器将要计满立即改变CCAP0H值,来改变脉宽
+  36   2                      {
+  37   3                              CCAP0H =  pwm_num;                      //P1.1输出
+  38   3                              //CCAP1H =  pwm_num;            //P1.0输出
+  39   3                              //CCAP2H =  255- pwm_num;       //P3.7输出
+  40   3                      }
+  41   2              }
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     99    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      2    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

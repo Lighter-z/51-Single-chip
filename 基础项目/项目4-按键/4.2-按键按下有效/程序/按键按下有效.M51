@@ -1,0 +1,102 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/07/2017  20:33:32  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\安装目录\KEIL4\C51\BIN\BL51.EXE 按键按下有效.obj TO 按键按下有效
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  按键按下有效.obj (_醇黖聪_有效)
+  D:\安装目录\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  按键按下有效 (_醇黖聪_有效)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0017H     UNIT         ?PR?KEY?_醇黖聪_有效
+            CODE    001AH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0026H     000BH     UNIT         ?PR?_DELAY?_醇黖聪_有效
+            CODE    0031H     0008H     UNIT         ?PR?MAIN?_醇黖聪_有效
+
+
+
+OVERLAY MAP OF MODULE:   按键按下有效 (_醇黖聪_有效)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?_醇黖聪_有效
+
+?PR?MAIN?_醇黖聪_有效
+  +--> ?PR?KEY?_醇黖聪_有效
+
+?PR?KEY?_醇黖聪_有效
+  +--> ?PR?_DELAY?_醇黖聪_有效
+
+
+
+SYMBOL TABLE OF MODULE:  按键按下有效 (_醇黖聪_有效)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        _醇黖聪_有效
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:0026H         PUBLIC        _delay
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/07/2017  20:33:32  PAGE 2
+
+
+  C:0031H         PUBLIC        main
+  B:0080H.0       PUBLIC        led
+  C:0003H         PUBLIC        key
+  B:00A0H.0       PUBLIC        key1
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:0026H         LINE#         4
+  C:0026H         LINE#         5
+  C:0026H         LINE#         6
+  C:0030H         LINE#         7
+  -------         ENDPROC       _DELAY
+  -------         PROC          KEY
+  C:0003H         LINE#         8
+  C:0003H         LINE#         9
+  C:0003H         LINE#         10
+  C:0006H         LINE#         11
+  C:0006H         LINE#         12
+  C:000DH         LINE#         13
+  C:0010H         LINE#         14
+  C:0010H         LINE#         15
+  C:0012H         LINE#         16
+  C:0019H         LINE#         17
+  C:0019H         LINE#         18
+  C:0019H         LINE#         19
+  -------         ENDPROC       KEY
+  -------         PROC          MAIN
+  C:0031H         LINE#         20
+  C:0031H         LINE#         21
+  C:0031H         LINE#         22
+  C:0034H         LINE#         23
+  C:0034H         LINE#         24
+  C:0034H         LINE#         25
+  C:0037H         LINE#         26
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        _醇黖聪_有效
+
+Program Size: data=9.0 xdata=0 code=57
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,56 @@
+C51 COMPILER V8.02   MAIN                                                                  01/14/2016 20:05:31 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\µ¥Æ¬»úÈí¼þ\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //ÊýÂë¹ÜÏÔÊ¾0-9Ãë£¬Õë¶Ô½Ì²ÄÉè¼Æ
+   2          //ÊýÂë¹Ü°´ÃëÏÔÊ¾0-9
+   3          //Éè¼Æ£ºµ¥Æ¬»ú´´ÐÂ¹¤×÷ÊÒ£¬2015Äê12ÔÂ15ÈÕ
+   4          #include<reg51.h>
+   5          code unsigned char seven_seg[10] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90}; //Êý×Ö0~9µÄÏÔÊ¾·½·
+             -¨
+   6          unsigned char cp,i;                                                                                                                                             //È«¾Ö±äÁ¿
+   7          /*timer0ÖÐ¶Ï·þÎñº¯Êý*/
+   8          void timer0_isr()interrupt 1                                                                                                                    //timer0ÖÐ¶Ï·þÎñº¯Êý
+   9          {
+  10   1              TH0 = (65536-5000)/256;                                                                                                                         //TH0ÖØÖÃº¯Êý
+  11   1              TL0 = (65536-5000)%256;                                                                                                                         //TL0ÖØÖÃº¯Êý
+  12   1              cp++;                                                                                                                                                           //Ã¿´Î´¥·¢ÖÐ¶Ïcp¼Ó1
+  13   1              if(cp >= 200)                                                                                                                                           //200´ÎÖÐ¶Ï    1Ãë
+  14   1              {cp = 0;i++;}
+  15   1              if(i >= 10)i = 0;
+  16   1              P0 = seven_seg[i];
+  17   1      }
+  18          void timer0_init()                                                                                                                                              //ÖÐ¶Ï³õÊ¼»¯º¯Êý
+  19          {
+  20   1              TMOD = 0X01;                                                                                                                                            //ÉèÖÃ¼ÆÊ±Æ÷Ä£Ê½¿ØÖÆ¼Ä´æÆ÷£¬time0¹¤×÷ÔÚ¶¨Ê±·½Ê½1
+  21   1              TH0 = (65536-5000)/256;                                                                                                                         //TH0 Ô¤ÖÃ£¬65536Ê®Áù½øÖÆ¸ß8Î»¡£
+  22   1              TL0 = (65536-5000)%256;                                                                                                                         //TL0 Ô¤ÖÃ£¬65536Ê®Áù½øÖÆµÍ8Î»¡£
+  23   1              EA = 1;                                                                                                                                                         //¿ª×ÜÖÐ¶Ï
+  24   1              TR0 = 1;                                                                                                                                                        //Æô¶¯¶¨Ê±Æ÷T0£¬¶Ô»úÆ÷Âö³å¼ÆÊý5000¸ö¼ÆÂúÒç³öÒý·¢ÖÐ¶Ï  Ô¼0.5ms
+  25   1              ET0 = 1;                                                                                                                                                        //¿ªT0ÖÐ¶Ï
+  26   1      }
+  27          void main()
+  28          {       
+  29   1              timer0_init();                                                                                                                                          //timer_0³õÊ¼»¯,ÎªÖÐ¶Ï×öºÃ×¼±¸
+  30   1              P2 = 0;                                                                                                                                                         //²ÉÓÃ¹²Ñô¼«ÊýÂë¹Ü£¬¹²Ñô¼«ÓëP2.0Ö®¼äÓÐ·´ÏàÆ÷£¬ÐèÒªÉèÖÃP2.0 = 0
+  31   1              while(1);                                                                                                                                                       //µÈ´ýÖÐ¶Ï
+  32   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     79    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\wag\Desktop\项目集\项目集\教材中项目\1-基础项目（11个）\项目7-PC机与51单片机串口通信\程序\串口通信.uv2
+Project File Date:  12/18/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=52
+creating hex file from "串口通信"...
+"串口通信" - 0 Error(s), 0 Warning(s).

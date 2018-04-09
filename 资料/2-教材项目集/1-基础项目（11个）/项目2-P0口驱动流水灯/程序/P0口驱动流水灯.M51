@@ -1,0 +1,91 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  10:36:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO P0口驱动流水灯
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  P0口驱动流水灯 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?MAIN
+            DATA    0010H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0011H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     001DH     UNIT         ?PR?MAIN?MAIN
+            CODE    00ACH     000BH     UNIT         ?PR?_DELAY?MAIN
+            CODE    00B7H     000BH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   P0口驱动流水灯 (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  0010H    0001H
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  P0口驱动流水灯 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:008FH         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  10:36:15  PAGE 2
+
+
+  D:0008H         PUBLIC        LED
+  C:00ACH         PUBLIC        _delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:00ACH         LINE#         6
+  C:00ACH         LINE#         7
+  C:00ACH         LINE#         8
+  C:00B6H         LINE#         9
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0010H         SYMBOL        i
+  -------         ENDDO         
+  C:008FH         LINE#         10
+  C:008FH         LINE#         11
+  C:008FH         LINE#         13
+  C:008FH         LINE#         14
+  C:008FH         LINE#         15
+  C:0097H         LINE#         16
+  C:009EH         LINE#         17
+  C:00A0H         LINE#         18
+  C:00AAH         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=18.0 xdata=0 code=194
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

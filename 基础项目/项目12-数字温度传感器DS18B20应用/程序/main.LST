@@ -1,0 +1,100 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              10/21/2017 09:57:02 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>                    
+   2          #include<DS18B20.c>
+   3          code uchar seven_seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+   4          uchar cp2;
+   5          uint aa,cp1;
+   6          uint temp_num,temp_num1,temp_dot,temp;
+   7          sbit P1_0=P1^0;
+   8          void timer0_isr()interrupt 1     //中断服务函数
+   9          {
+  10   1        TH0 = (65536-2000)/256;       //TH0重置函数
+  11   1        TL0 = (65536-2000)%256;       //TL0重置函数
+  12   1        cp1++;
+  13   1        if(cp1>=500)            //1秒
+  14   1        {
+  15   2          cp1 = 0;
+  16   2          temp_num = Read_Temperature();        //将读取到的温度赋值给temp_num
+  17   2          temp_dot = c * 0.625;            //得到温度的小数
+  18   2          if((temp_num&0x80)==0x80)         //如果温度为负值
+  19   2          {
+  20   3            temp_dot = (0x0f-c)*0.625;        //补码转换原码，小数处理
+  21   3            temp_num1 = 0xff - temp_num;      //补码转换原码，整数处理
+  22   3          }
+  23   2          else temp_num1 = temp_num;          //小数转换为十进制
+  24   2        }
+  25   1        P0 = 0xff;                    //消隐
+  26   1        switch(cp2)
+  27   1        {
+  28   2          case 0:P1_0 = 0;P0 = 0x01;P1_0 = 1;P1_0 = 0;
+  29   2          P0 = seven_seg[temp_dot];break;       //显示小数
+  30   2          case 1:P1_0 = 0;P0 = 0x02;P1_0 = 1;P1_0 = 0;
+  31   2          P0 = 0x7f&seven_seg[temp_num1%10];break;  //显示个位并加小数点
+  32   2          case 2:
+  33   2          {
+  34   3            if(temp_num<10)break;  //如果温度小于10度，且不为负值，十位0不显示
+  35   3            if((temp_num>0x80)&&(temp_num1<10))  //如果温度小于10度，并为负值，十位0不显示，只显示——
+  36   3            {
+  37   4              P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;
+  38   4              P0 = 0xbf;break;
+  39   4            }
+  40   3            P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;//如果温度大于10度，十位正常显示
+  41   3            P0=seven_seg[temp_num1/10];
+  42   3            break;
+  43   3          }   
+  44   2          case 3:
+  45   2          {
+  46   3            if((temp_num>0x80)&&((temp_num1/10)>0))    //如果为负值，且十位不为0，百位显示——
+  47   3            {
+  48   4              P1_0 = 0;P0 = 0x08;P1_0 = 1;P1_0 = 0;
+  49   4              P0 = 0xbf;
+  50   4              break;  
+  51   4            }
+  52   3          }
+  53   2        }
+  54   1        cp2++;
+  55   1        if(cp2>=4)cp2 = 0;    
+C51 COMPILER V9.56.0.0   MAIN                                                              10/21/2017 09:57:02 PAGE 2   
+
+  56   1      }
+  57          void timer0_init()
+  58          {
+  59   1        TMOD = 0x01;             //方式一
+  60   1        TH0 = (65536-2000)/256;        //TH0 预置，65536十六进制低8位。
+  61   1        TL0 = (65536-2000)%256;        //TL0 预置，65536十六进制高8位。
+  62   1        EA = 1;                //终端总开关打开
+  63   1        TR0 = 1;               //定时计数器T0的起停控制位打开
+  64   1        ET0 = 1;               //定时计数器T0的中断端控制位打开
+  65   1      }
+  66          void main()
+  67          {
+  68   1        timer0_init();
+  69   1        write_temprom(128,-55); //向18B20的暂存写上、下限温度分别为128，-55
+  70   1        Write_OneChar(0x48);  //向18B20的rom中写数据    
+  71   1        while(1);
+  72   1        //{
+  73   1        //  temp = read_temprom;  //从DS18B20中读取的温度给变量temp 
+  74   1        //}
+  75   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    633    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

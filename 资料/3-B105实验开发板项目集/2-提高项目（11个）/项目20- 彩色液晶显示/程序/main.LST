@@ -1,0 +1,42 @@
+C51 COMPILER V8.02   MAIN                                                                  01/17/2016 16:59:59 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //彩色液晶显示，针对105型实验开发板设计
+   2          //通过彩色液晶显示彩色图片，使用单片机为15F系列单片机机
+   3          //设计：单片机创新工作室--冷恩鑫设计，2015年12月15日
+   4          #include <reg51.h>
+   5          #include <intrins.h>
+   6          #include<tupian.c>
+   7          #include<TFT.c>
+   8          void main(void)
+   9          {  
+  10   1          P2 = 0xff;
+  11   1          P0 = 0xff;   
+  12   1          LCD_init();
+  13   1          LCD_clear(0);
+  14   1          pic_play(0,128,0,160);
+  15   1      //  pic_play(68,122,8,74);
+  16   1      //      pic_play(7,61,82,148);
+  17   1      //      pic_play(68,122,82,148);
+  18   1          while(1);
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    497    ----
+   CONSTANT SIZE    =  40968    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

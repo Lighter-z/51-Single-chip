@@ -1,0 +1,63 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 11:03:41 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //8位数码管动态显示，针对教材设计
+   2          //用8位共阳数码管在P0口以及74hc573芯片驱动下，显示0-7
+   3          //设计：单片机创新工作室--齐霄涵设计，2015年12月15日
+   4          #include<reg51.h>
+   5          code unsigned char seven_seg[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,
+   6                                                                                  0x82,0xf8,0x80,0x90,0xbf,0xff}; 
+   7          unsigned char t;                                                 
+   8          void timer0_isr()interrupt 1                                            //中断服务函数
+   9          {
+  10   1              TH0 = (65536-2000)/256;                                                 //每次触发中断后从装初值，使下次对机器脉冲计数2000个计满溢出引发中断  约0.2
+             -ms
+  11   1              TL0 = (65536-2000)%256;
+  12   1          P0 = 0xff;                                                                          //Proteus 仿真需要消隐
+  13   1              switch(t)
+  14   1              {
+  15   2                      case 0:P0 = seven_seg[0];P2 = ~0x01;break;      //数码管段选，数码管位选
+  16   2                      case 1:P0 = seven_seg[1];P2 = ~0x02;break;
+  17   2                      case 2:P0 = seven_seg[2];P2 = ~0x04;break;
+  18   2                      case 3:P0 = seven_seg[3];P2 = ~0x08;break;
+  19   2                      case 4:P0 = seven_seg[4];P2 = ~0x10;break;
+  20   2                      case 5:P0 = seven_seg[5];P2 = ~0x20;break;
+  21   2                      case 6:P0 = seven_seg[6];P2 = ~0x40;break;
+  22   2                      case 7:P0 = seven_seg[7];P2 = ~0x80;break;
+  23   2              }
+  24   1              t++;if(t>=8)t=0;
+  25   1      }
+  26          void timer0_init()                                                                      //中断初始化函数
+  27          {
+  28   1              TMOD = 0X01;                                                                    //T0工作方式1
+  29   1              TH0 = (65536-2000)/256;                                                 //对机器脉冲计数2000个计满溢出引发中断  约0.2ms
+  30   1              TL0 = (65536-2000)%256;
+  31   1              EA = 1;                                                                                 //开总中断
+  32   1              TR0 = 1;                                                                                //启动定时器T0
+  33   1              ET0 = 1;                                                                                //开T0中断
+  34   1      }
+  35          void main()
+  36          {       
+  37   1              timer0_init();                                                                  //中断初始化
+  38   1              while(1);
+  39   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    201    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

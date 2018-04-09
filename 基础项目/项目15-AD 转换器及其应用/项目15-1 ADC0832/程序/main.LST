@@ -1,0 +1,65 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              10/10/2017 20:15:02 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<intrins.h>
+   3          #include<adc0832.c>
+   4          code uchar seven_seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x82,0xf8,0x80,0x90};
+   5          uchar cp1,cp2,dat_ad;
+   6          void timer0_init()          //中断初始化函数
+   7          {
+   8   1        TMOD = 0x01;          
+   9   1        TL0 = 0x78;
+  10   1        TH0 = 0xec;
+  11   1        EA = 1;
+  12   1        TR0 = 1;
+  13   1        ET0 = 1;
+  14   1      }
+  15          void timer0_isr()interrupt 1      //中断服务函数
+  16          {
+  17   1        TL0 = 0x78;
+  18   1        TH0 = 0xec;
+  19   1        cp1++;
+  20   1        if(cp1>100)           //0.5s
+  21   1        {
+  22   2          cp1 = 0;
+  23   2          dat_ad=adc0832_ch0();   //adc0832转换一次
+  24   2        }
+  25   1        P0 = 0xff;            //消隐
+  26   1        switch(cp2)
+  27   1        {
+  28   2          case 0:P0 = seven_seg[dat_ad%10];P2 = 0x01;break;
+  29   2            case 1:P0 = seven_seg[dat_ad%100/10];P2 = 0x02;break;
+  30   2          case 2:P0 = seven_seg[dat_ad/100];P2 = 0x04;break;
+  31   2        }
+  32   1        cp2++;
+  33   1        if(cp2>=3)
+  34   1        cp2 = 0;
+  35   1      }
+  36          void main()
+  37          {
+  38   1        timer0_init();
+  39   1        adc0832_init();
+  40   1        while(1);
+  41   1      }
+*** WARNING C294 IN LINE 31 OF main.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    223    ----
+   CONSTANT SIZE    =      9    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

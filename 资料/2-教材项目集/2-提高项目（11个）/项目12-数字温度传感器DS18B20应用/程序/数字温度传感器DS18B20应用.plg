@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Administrator\Desktop\单片机\单片机\2-教材项目集\2-提高项目（11个）\项目12-数字温度传感器DS18B20应用\程序\数字温度传感器DS18B20应用.uvproj
+Project File Date:  <unknown>
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=27.0 xdata=0 code=1337
+creating hex file from "数字温度传感器DS18B20应用"...
+"数字温度传感器DS18B20应用" - 0 Error(s), 0 Warning(s).

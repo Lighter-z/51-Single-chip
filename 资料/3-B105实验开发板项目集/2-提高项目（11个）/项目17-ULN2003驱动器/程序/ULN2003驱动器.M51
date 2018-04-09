@@ -1,0 +1,211 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/17/2016  11:35:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO ULN2003Çý¶¯Æ÷
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  ULN2003Çý¶¯Æ÷ (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     005DH     UNIT         ?PR?KEY_SCAN?MAIN
+            CODE    0060H     001EH     UNIT         ?PR?_DELAYB?MAIN
+            CODE    007EH     001DH     UNIT         ?PR?MAIN?MAIN
+            CODE    009BH     0010H     UNIT         ?CO?MAIN
+            CODE    00ABH     000FH     UNIT         ?PR?_DELAY?MAIN
+            CODE    00BAH     000DH     UNIT         ?PR?MOTOR_FFW?MAIN
+            CODE    00C7H     000DH     UNIT         ?PR?MOTOR_REV?MAIN
+            CODE    00D4H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   ULN2003Çý¶¯Æ÷ (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?KEY_SCAN?MAIN
+  +--> ?PR?MOTOR_FFW?MAIN
+  +--> ?PR?MOTOR_REV?MAIN
+
+?PR?KEY_SCAN?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?MOTOR_FFW?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAYB?MAIN
+
+?PR?MOTOR_REV?MAIN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/17/2016  11:35:53  PAGE 2
+
+
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAYB?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  ULN2003Çý¶¯Æ÷ (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A0H.4       PUBLIC        P2_4
+  D:0008H         PUBLIC        key1_down
+  D:0009H         PUBLIC        key2_down
+  D:000AH         PUBLIC        key3_down
+  C:007EH         PUBLIC        main
+  C:0068H         PUBLIC        _delayB
+  C:0003H         PUBLIC        key_scan
+  C:00BAH         PUBLIC        motor_ffw
+  C:00C7H         PUBLIC        motor_rev
+  C:009BH         PUBLIC        FFW
+  C:00A3H         PUBLIC        REV
+  C:00AFH         PUBLIC        _delay
+  D:000BH         PUBLIC        key1_flag
+  D:000CH         PUBLIC        key2_flag
+  D:000DH         PUBLIC        key3_flag
+  B:00A0H.0       PUBLIC        key1
+  B:00A0H.1       PUBLIC        key2
+  B:00A0H.2       PUBLIC        key3
+  C:00ABH         SYMBOL        L?0037
+  -------         PROC          L?0036
+  -------         ENDPROC       L?0036
+  C:00ABH         SYMBOL        L?0037
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:00AFH         LINE#         9
+  C:00AFH         LINE#         10
+  C:00AFH         LINE#         11
+  C:00B9H         LINE#         12
+  -------         ENDPROC       _DELAY
+  -------         PROC          KEY_SCAN
+  C:0003H         LINE#         14
+  C:0003H         LINE#         15
+  C:0003H         LINE#         16
+  C:0005H         LINE#         17
+  C:0008H         LINE#         18
+  C:0008H         LINE#         19
+  C:000BH         LINE#         20
+  C:0011H         LINE#         21
+  C:0011H         LINE#         22
+  C:0019H         LINE#         23
+  C:0019H         LINE#         24
+  C:001CH         LINE#         25
+  C:001FH         LINE#         26
+  C:0021H         LINE#         27
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/17/2016  11:35:53  PAGE 3
+
+
+  C:0023H         LINE#         28
+  C:0023H         LINE#         29
+  C:0026H         LINE#         30
+  C:0026H         LINE#         31
+  C:0029H         LINE#         32
+  C:002FH         LINE#         33
+  C:002FH         LINE#         34
+  C:0037H         LINE#         35
+  C:0037H         LINE#         36
+  C:003AH         LINE#         37
+  C:003DH         LINE#         38
+  C:003FH         LINE#         39
+  C:0041H         LINE#         40
+  C:0041H         LINE#         41
+  C:0044H         LINE#         42
+  C:0044H         LINE#         43
+  C:0047H         LINE#         44
+  C:004DH         LINE#         45
+  C:004DH         LINE#         46
+  C:0055H         LINE#         47
+  C:0055H         LINE#         48
+  C:0058H         LINE#         49
+  C:005BH         LINE#         50
+  C:005DH         LINE#         51
+  C:005FH         LINE#         52
+  C:005FH         LINE#         53
+  -------         ENDPROC       KEY_SCAN
+  -------         PROC          L?0038
+  -------         ENDPROC       L?0038
+  -------         PROC          _DELAYB
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0005H         SYMBOL        k
+  -------         ENDDO         
+  C:0068H         LINE#         4
+  C:0068H         LINE#         5
+  C:0068H         LINE#         7
+  C:0072H         LINE#         8
+  C:007DH         LINE#         9
+  -------         ENDPROC       _DELAYB
+  -------         PROC          MOTOR_FFW
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:00BAH         LINE#         11
+  C:00BAH         LINE#         12
+  C:00BAH         LINE#         14
+  C:00BCH         LINE#         15
+  C:00BCH         LINE#         16
+  C:00BFH         LINE#         17
+  C:00C2H         LINE#         18
+  C:00C6H         LINE#         19
+  -------         ENDPROC       MOTOR_FFW
+  -------         PROC          MOTOR_REV
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/17/2016  11:35:53  PAGE 4
+
+
+  C:00C7H         LINE#         21
+  C:00C7H         LINE#         22
+  C:00C7H         LINE#         24
+  C:00C9H         LINE#         25
+  C:00C9H         LINE#         26
+  C:00CCH         LINE#         27
+  C:00CFH         LINE#         28
+  C:00D3H         LINE#         29
+  -------         ENDPROC       MOTOR_REV
+  -------         PROC          MAIN
+  C:007EH         LINE#         7
+  C:007EH         LINE#         8
+  C:007EH         LINE#         9
+  C:007EH         LINE#         10
+  C:007EH         LINE#         11
+  C:0081H         LINE#         12
+  C:0086H         LINE#         13
+  C:0089H         LINE#         14
+  C:008EH         LINE#         15
+  C:0091H         LINE#         16
+  C:0096H         LINE#         17
+  C:0099H         LINE#         18
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=15.0 xdata=0 code=224
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

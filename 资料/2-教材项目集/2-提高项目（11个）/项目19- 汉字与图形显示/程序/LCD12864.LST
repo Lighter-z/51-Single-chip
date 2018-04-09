@@ -1,0 +1,176 @@
+C51 COMPILER V8.02   LCD12864                                                              01/16/2016 12:06:47 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE LCD12864
+OBJECT MODULE PLACED IN LCD12864.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE LCD12864.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //汉字与图形显示，教材和B105型实验开发板通用
+   2          //DA转换
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          /*************************************************************/
+   5          #include<reg51.h>
+   6          #include<ziku.c>
+   7          #include <intrins.h>
+   8          #define uchar unsigned char
+   9          #define uint unsigned int
+  10          sbit REST = P2^0;                                                                                                               //Reset signal, active"L"
+  11          sbit C_D = P2^1;                                                                                                                        //L:data   H:code
+  12          sbit C_E = P2^2;                                                                                                                        //Chip enable signal, active"L"
+  13          sbit R_D = P2^3;                                                                                                                        //read signal, active"L"
+  14          sbit W_R = P2^4;                                                                                                                        //write signal, active"L"
+  15          #define width                                    15                                                                                     //显示区宽度
+  16          #define Graphic                      1
+  17          #define TXT                      0
+  18          #define LcmLengthDots            128
+  19          #define LcmWidthDots             64                                                                       
+             -                                                                                                                        
+             -                                        
+  20          /**************************12864液晶的相关函数**********************/                                                                     
+  21          void delay_nms(uint i)
+  22          {
+  23   1              while(i)
+  24   1              i--;
+  25   1      }
+  26          void write_commond(uchar com)                                                                                           //对液晶写一个指令
+  27          {                                                                                       
+  28   1              C_E = 0;        
+  29   1              C_D = 1;
+  30   1              R_D = 1;
+  31   1              P0 = com;
+  32   1              W_R = 0;                                                                                                                                // write          
+  33   1              _nop_();                                        
+  34   1              W_R = 1;                                                                                                                                // disable write
+  35   1              C_E = 1;                                                                        
+  36   1              C_D = 0;
+  37   1      }
+  38          void write_date(uchar dat)                                                                                                      //对液晶写一个数据
+  39          {
+  40   1              C_E = 0;
+  41   1              C_D = 0;
+  42   1              R_D = 1;
+  43   1              P0 = dat;
+  44   1              W_R = 0;
+  45   1              _nop_();
+  46   1              W_R = 1;
+  47   1              C_E = 1;
+  48   1              C_D = 1;
+  49   1      }
+  50           void write_dc(uchar com,uchar dat)                                                                                     //写一个指令和一个数据
+  51          {
+  52   1              write_date(dat);
+  53   1              write_commond(com);
+C51 COMPILER V8.02   LCD12864                                                              01/16/2016 12:06:47 PAGE 2   
+
+  54   1      }
+  55          //写一个指令和两个数据
+  56          void write_ddc(uchar com,uchar dat1,uchar dat2)
+  57          {
+  58   1              write_date(dat1);
+  59   1              write_date(dat2);
+  60   1              write_commond(com);
+  61   1      }
+  62          //LCD初始化函数
+  63          void F12864_init(void)
+  64          {       
+  65   1              REST = 0;
+  66   1              delay_nms(2000);                                        
+  67   1              REST = 1;
+  68   1              write_ddc(0x40,0x00,0x00);                                                                                      //设置文本显示区首地址
+  69   1              write_ddc(0x41,128/8,0x00);                                                                                     //设置文本显示区宽度
+  70   1              write_ddc(0x42,0x00,0x08);                                                                                      //设置图形显示区首地址0x0800
+  71   1              write_ddc(0x43,128/8,0x00);                                                                                     //设置图形显示区宽度
+  72   1              write_commond(0xA0);                                                                                    //设置光标形状 8x8方块
+  73   1              write_commond(0x80);                                                                                    //显示方式设置 文本and图形(异或)
+  74   1              write_commond(0x92);                                                                                    //设置光标
+  75   1              write_commond(0x9F);                                                                                    //显示开关设置 文本开,图形开,光标闪烁关                                                         
+  76   1      }
+  77          //**************************//清显示存储器函数
+  78          void F12864_clear(void)
+  79          {
+  80   1              unsigned int i;
+  81   1              write_ddc(0x24,0x00,0x00);                                                                                              //置地址指针为从零开始
+  82   1              write_commond(0xb0);                                                                                                    //自动写
+  83   1              for(i = 0;i < 128 * 64 ;i++)write_date(0x00);                                                   //清一屏
+  84   1              write_commond(0xb2);                                                                                                    //自动写结束
+  85   1              write_ddc(0x24,0x00,0x00);                                                                                              //重置地址指针 
+  86   1      }
+  87          //设定显示的地址
+  88          void goto_xy(uchar x,uchar y,uchar mode)
+  89          {
+  90   1           uint  temp;
+  91   1           temp = 128 / 8 * y + x;
+  92   1           if(mode)                                                                                           //mode = 1为Graphic
+  93   1           {                                                                                                  //如果图形模式要加上图形区首地址0x0800
+  94   2               temp = temp + 0x0100;
+  95   2           }
+  96   1           write_ddc(0x24,temp & 0xff,temp / 256);                                                            //地址指针位置
+  97   1      }
+  98          //显示一个ASCII码函数
+  99          void Putchar(uchar x,uchar y,uchar Charbyte)
+ 100          {
+ 101   1           goto_xy(x,y,TXT);
+ 102   1           write_dc(0xC4,Charbyte-32);                                                                                //数据一次读写方式//查字符rom    
+ 103   1      }
+ 104          void display_string(uchar x,uchar y,uchar *p)
+ 105          {
+ 106   1              while(*p != 0)
+ 107   1              {
+ 108   2                      if(x > 15 )                                                                                     //自动换行       128*64
+ 109   2                      {                                                                                       
+ 110   3                              x = 0;
+ 111   3                              y++;
+ 112   3                      }
+ 113   2                      Putchar(x,y,*p);
+ 114   2                      ++x;
+ 115   2                      ++p;
+C51 COMPILER V8.02   LCD12864                                                              01/16/2016 12:06:47 PAGE 3   
+
+ 116   2              }
+ 117   1      }
+ 118          //显示一串汉字,j = k + n为(n为要显示的字的个数),k为选择从哪个字开始
+ 119          void dprintf_hanzi_string_1(struct typFNT_GB16 code *GB_16,uint X_pos,uint Y_pos,uchar j,uchar k)
+ 120          {  
+ 121   1              unsigned int address;
+ 122   1              unsigned char m,n;
+ 123   1              while(k < j)
+ 124   1              {
+ 125   2                      m = 0;
+ 126   2                      address = LcmLengthDots / 8 * Y_pos + X_pos + 0x0800;
+ 127   2                      for(n = 0;n < 16;n++)                                                           //计数值16
+ 128   2              {
+ 129   3                         write_ddc(0x24,(uchar)(address),(uchar)(address>>8));                        //设置显示存储器地址
+ 130   3                         write_dc(0xc0,GB_16[k].Mask[m++]);                                           //写入汉字字模左部
+ 131   3                         write_dc(0xc0,GB_16[k].Mask[m++]);                                       //写入汉字字模右部
+ 132   3                         address = address + 128/8;                                                   //修改显示存储器地址，显示下一列（共16列）
+ 133   3                  }
+ 134   2                      X_pos += 2;
+ 135   2                      k++;
+ 136   2              }
+ 137   1      }
+ 138          void main()
+ 139          {
+ 140   1              F12864_init();
+ 141   1              F12864_clear();
+ 142   1              while(1)
+ 143   1              {
+ 144   2                      dprintf_hanzi_string_1(GB_16,2,5,6,0);                                                          //汉字液晶显示
+ 145   2                      display_string(5,5,":2010/11");                                                         
+ 146   2              }
+ 147   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    473    ----
+   CONSTANT SIZE    =    369    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

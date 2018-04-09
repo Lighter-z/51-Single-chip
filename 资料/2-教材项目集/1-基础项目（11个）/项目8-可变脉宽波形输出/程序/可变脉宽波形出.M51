@@ -1,0 +1,104 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  11:12:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 可变脉宽波形出
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  可变脉宽波形出 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?MAIN
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?MAIN?MAIN
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0044H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0052H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0062H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   可变脉宽波形出 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  可变脉宽波形出 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:000EH         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  11:12:36  PAGE 2
+
+
+  D:0009H         PUBLIC        cp2
+  B:00A8H.7       PUBLIC        EA
+  B:0090H.7       PUBLIC        P1_7
+  C:0003H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:000AH         PUBLIC        tt
+  C:0052H         PUBLIC        timer0_init
+  -------         PROC          TIMER0_INIT
+  C:0052H         LINE#         7
+  C:0052H         LINE#         8
+  C:0052H         LINE#         9
+  C:0055H         LINE#         10
+  C:0058H         LINE#         11
+  C:005BH         LINE#         12
+  C:005DH         LINE#         13
+  C:005FH         LINE#         14
+  C:0061H         LINE#         15
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0_ISR
+  C:000EH         LINE#         16
+  C:0017H         LINE#         18
+  C:001BH         LINE#         19
+  C:0027H         LINE#         20
+  C:0036H         LINE#         21
+  C:004BH         LINE#         22
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          MAIN
+  C:0003H         LINE#         23
+  C:0003H         LINE#         24
+  C:0003H         LINE#         25
+  C:0006H         LINE#         26
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=12.0 xdata=0 code=107
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,172 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        08/20/2017  20:23:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\Èí¼þ\KEILC51\C51\BIN\BL51.EXE main.obj TO µ¥Æ¬»úÒôÀÖ³ÌÐò·ÖÎö
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\Èí¼þ\KEILC51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  µ¥Æ¬»úÒôÀÖ³ÌÐò·ÖÎö (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     019BH     UNIT         ?CO?MAIN
+            CODE    099BH     0042H     UNIT         ?PR?_YANZOU?MAIN
+            CODE    09DDH     0032H     UNIT         ?PR?MAIN?MAIN
+            CODE    0A0FH     0016H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0A25H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0A35H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0A41H     0007H     UNIT         ?PR?TIMER0_ISR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   µ¥Æ¬»úÒôÀÖ³ÌÐò·ÖÎö (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_YANZOU?MAIN
+
+?PR?_YANZOU?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  µ¥Æ¬»úÒôÀÖ³ÌÐò·ÖÎö (MAIN)
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/20/2017  20:23:50  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:0A41H         PUBLIC        timer0_isr
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  C:0A0FH         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  C:09DDH         PUBLIC        main
+  C:099BH         PUBLIC        _yanzou
+  C:0800H         PUBLIC        pinlv
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        keys
+  B:00B0H.7       PUBLIC        fmq
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:0009H         PUBLIC        a
+  D:00C8H         PUBLIC        T2CON
+  D:000AH         PUBLIC        i
+  D:000BH         PUBLIC        k
+  C:0A25H         PUBLIC        timer0_init
+  C:0889H         PUBLIC        jiepai
+  D:000CH         PUBLIC        x
+  D:000DH         PUBLIC        y
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        m
+  -------         DO            
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:0A0FH         LINE#         28
+  C:0A0FH         LINE#         29
+  C:0A0FH         LINE#         31
+  C:0A19H         LINE#         32
+  C:0A19H         LINE#         33
+  C:0A24H         LINE#         34
+  C:0A24H         LINE#         35
+  -------         ENDPROC       _DELAY
+  -------         PROC          _YANZOU
+  D:0007H         SYMBOL        pinlv
+  D:0004H         SYMBOL        jiepai
+  -------         DO            
+  D:0006H         SYMBOL        pl
+  D:0002H         SYMBOL        jp
+  -------         ENDDO         
+  C:099BH         LINE#         36
+  C:099BH         LINE#         37
+  C:099BH         LINE#         40
+BL51 BANKED LINKER/LOCATER V6.22                                                      08/20/2017  20:23:50  PAGE 3
+
+
+  C:09A6H         LINE#         41
+  C:09B3H         LINE#         43
+  C:09B3H         LINE#         44
+  C:09BDH         LINE#         45
+  C:09BDH         LINE#         46
+  C:09BFH         LINE#         47
+  C:09C9H         LINE#         48
+  C:09CBH         LINE#         49
+  C:09D5H         LINE#         50
+  C:09DCH         LINE#         51
+  C:09DCH         LINE#         52
+  -------         ENDPROC       _YANZOU
+  -------         PROC          TIMER0_INIT
+  C:0A25H         LINE#         53
+  C:0A25H         LINE#         54
+  C:0A25H         LINE#         55
+  C:0A28H         LINE#         56
+  C:0A2BH         LINE#         57
+  C:0A2EH         LINE#         58
+  C:0A30H         LINE#         59
+  C:0A32H         LINE#         60
+  C:0A34H         LINE#         61
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0_ISR
+  C:0A41H         LINE#         62
+  C:0A41H         LINE#         64
+  C:0A44H         LINE#         65
+  C:0A47H         LINE#         66
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          MAIN
+  C:09DDH         LINE#         67
+  C:09DDH         LINE#         68
+  C:09DDH         LINE#         69
+  C:09E0H         LINE#         70
+  C:09E0H         LINE#         71
+  C:09E0H         LINE#         72
+  C:0A01H         LINE#         73
+  C:0A03H         LINE#         74
+  C:0A0DH         LINE#         75
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 023FH BYTE (28%) *
+******************************************************************************
+
+Program Size: data=15.0 xdata=0 code=590
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

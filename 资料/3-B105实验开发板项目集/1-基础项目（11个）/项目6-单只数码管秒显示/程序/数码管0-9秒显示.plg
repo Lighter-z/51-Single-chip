@@ -1,0 +1,21 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\Administrator\桌面\B105型开发板项目集（修改版）\1-基础项目（11个）\项目5-单只数码管秒显示\程序\数码管0-9秒显示.uv2
+Project File Date:  12/18/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=11.0 xdata=0 code=115
+creating hex file from "数码管0-9秒显示"...
+"数码管0-9秒显示" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=11.0 xdata=0 code=115
+creating hex file from "数码管0-9秒显示"...
+"数码管0-9秒显示" - 0 Error(s), 0 Warning(s).

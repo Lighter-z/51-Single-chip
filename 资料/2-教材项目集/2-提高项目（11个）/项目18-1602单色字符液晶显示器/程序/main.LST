@@ -1,0 +1,57 @@
+C51 COMPILER V8.08   MAIN                                                                  05/21/2017 13:53:52 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //1602单色字符液晶显示器，针对教材设计
+   2          //通过1602单色液晶显示器
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<lcd1602.c>
+   6          void main (void)  
+   7          {
+   8   1              uchar i,sec = 56;
+   9   1              F1602_init();
+  10   1              F1602_clear();
+  11   1              while(1)
+  12   1              {                                                                                                                                       //清屏函数
+  13   2                      F1602_clear();
+  14   2                      display_string("How are you");  
+  15   2                      gotoxy(2,0);                                                                                                                                    //定位第二行
+  16   2                      display_string("dat:2012/09/01");
+  17   2                      delay(50000);
+  18   2                      delay(50000);
+  19   2                      delay(50000);
+  20   2                      delay(50000);                                                   //第一屏延时
+  21   2                      F1602_clear();
+  22   2                      display_string("Time:");
+  23   2                      display_num(sec);
+  24   2                      display_string("  ");
+  25   2                      display_num(i);         //i为重复显示的次数     
+  26   2                      gotoxy(2,0);
+  27   2                      display_string("End");  
+  28   2                      delay(50000);
+  29   2                      delay(50000);
+  30   2                      delay(50000);
+  31   2                      delay(50000);                                                   //第二屏延时
+  32   2                      i++;if(i > 100)i = 0;
+  33   2              } 
+  34   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    265    ----
+   CONSTANT SIZE    =     40    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

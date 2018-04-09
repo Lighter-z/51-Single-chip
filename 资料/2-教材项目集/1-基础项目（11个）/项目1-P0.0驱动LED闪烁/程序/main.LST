@@ -1,0 +1,44 @@
+C51 COMPILER V8.02   MAIN                                                                  07/23/2008 17:31:40 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //P0.0口驱动LED灯闪烁，教材和B105型实验开发板通用
+   2          //LED在P0.0端口驱动下闪烁
+   3          //设计：单片机创新工作室--冷恩鑫设计，2015年12月15日             
+   4          #include<reg51.h>                                               //包含51头文件
+   5          sbit LED = P0^0;                                                //定义LED接P0.0
+   6          void delay(unsigned int x)                      //延时函数
+   7          {
+   8   1              while(x--);
+   9   1      }
+  10          void main(void)                                                 //主函数
+  11          {
+  12   1              P0 = 0X00;
+  13   1                                                      //复位后让P0为低电平
+  14   1              while(1) 
+  15   1              {
+  16   2                      LED = 1;                                                //P0.0输出高电平，LED1亮
+  17   2                      delay(10);                                      //调用延时函数，延时一段时间
+  18   2                      LED = 0;                                                //P0.0输出低电平，LED1灭
+  19   2                      delay(2);
+  20   2              }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

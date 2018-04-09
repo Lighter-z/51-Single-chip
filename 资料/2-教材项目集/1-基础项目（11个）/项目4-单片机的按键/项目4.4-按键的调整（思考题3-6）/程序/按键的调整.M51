@@ -1,0 +1,151 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  10:50:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 按键的调整
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  按键的调整 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0040H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    00CFH     0031H     UNIT         ?PR?KEY_SCAN?MAIN
+            CODE    0100H     000FH     UNIT         ?PR?_DELAY?MAIN
+            CODE    010FH     000BH     UNIT         ?PR?MAIN?MAIN
+            CODE    011AH     000AH     UNIT         ?CO?MAIN
+            CODE    0124H     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   按键的调整 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?KEY_SCAN?MAIN
+  +--> ?PR?DISPLAY?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?KEY_SCAN?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?DISPLAY?MAIN
+  +--> ?CO?MAIN
+
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  10:50:14  PAGE 2
+
+
+
+SYMBOL TABLE OF MODULE:  按键的调整 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:0090H.0       PUBLIC        P1_0
+  C:010FH         PUBLIC        main
+  C:011AH         PUBLIC        seven_seg
+  C:00CFH         PUBLIC        key_scan
+  D:0008H         PUBLIC        i
+  D:0009H         PUBLIC        k
+  C:0104H         PUBLIC        _delay
+  C:008FH         PUBLIC        display
+  B:00B0H.0       PUBLIC        key1
+  B:00B0H.1       PUBLIC        key2
+  C:0100H         SYMBOL        L?0026
+  -------         PROC          L?0025
+  -------         ENDPROC       L?0025
+  C:0100H         SYMBOL        L?0026
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:0104H         LINE#         4
+  C:0104H         LINE#         5
+  C:0104H         LINE#         6
+  C:010EH         LINE#         7
+  -------         ENDPROC       _DELAY
+  -------         PROC          KEY_SCAN
+  C:00CFH         LINE#         8
+  C:00CFH         LINE#         9
+  C:00CFH         LINE#         10
+  C:00D2H         LINE#         11
+  C:00D2H         LINE#         12
+  C:00D5H         LINE#         13
+  C:00D8H         LINE#         14
+  C:00D8H         LINE#         15
+  C:00DBH         LINE#         16
+  C:00DDH         LINE#         17
+  C:00E7H         LINE#         18
+  C:00E7H         LINE#         19
+  C:00E7H         LINE#         20
+  C:00EAH         LINE#         21
+  C:00EAH         LINE#         22
+  C:00EDH         LINE#         23
+  C:00F0H         LINE#         24
+  C:00F0H         LINE#         25
+  C:00F3H         LINE#         26
+  C:00F5H         LINE#         27
+  C:00FFH         LINE#         28
+  C:00FFH         LINE#         29
+  C:00FFH         LINE#         30
+  -------         ENDPROC       KEY_SCAN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  10:50:14  PAGE 3
+
+
+  -------         PROC          DISPLAY
+  C:008FH         LINE#         9
+  C:008FH         LINE#         10
+  C:008FH         LINE#         11
+  C:0092H         LINE#         12
+  C:009AH         LINE#         13
+  C:009AH         LINE#         14
+  C:00ADH         LINE#         15
+  C:00C2H         LINE#         16
+  C:00C2H         LINE#         17
+  C:00C4H         LINE#         18
+  C:00CEH         LINE#         19
+  -------         ENDPROC       DISPLAY
+  -------         PROC          MAIN
+  C:010FH         LINE#         20
+  C:010FH         LINE#         21
+  C:010FH         LINE#         22
+  C:010FH         LINE#         23
+  C:010FH         LINE#         24
+  C:0112H         LINE#         25
+  C:0115H         LINE#         26
+  C:0118H         LINE#         27
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=11.0 xdata=0 code=296
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

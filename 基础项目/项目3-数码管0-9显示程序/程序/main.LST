@@ -1,0 +1,41 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              04/09/2018 11:48:28 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          code unsigned char  seven_seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,
+   3                0x82,0xf8,0x80,0x90};//共阳数码管 0 - 9
+   4          unsigned char i = 0;
+   5          void delay(unsigned int x)//延时函数
+   6          {
+   7   1        while(x--);
+   8   1      }
+   9          void main()
+  10          {
+  11   1        while(1)
+  12   1        {
+  13   2          P0 = seven_seg[i];//显示数字
+  14   2          delay(50000);//延时
+  15   2          i++;
+  16   2          if(i>9)i = 0;
+  17   2        }
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     40    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

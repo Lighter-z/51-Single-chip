@@ -1,0 +1,144 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              11/24/2017 22:21:38 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          //实时时钟DS1302应用，针对B105型实验开发板设计
+   2          //实时读取时间
+   3          //设计：单片机创新工作室--齐霄涵设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<ds1302.c>
+   6          unsigned char month,year,date,sec,min,hour,week;
+   7          unsigned char flash;
+   8          unsigned char cp1,cp2,cp3;                          //定义变量
+   9          sbit P1_0 = P1^0;                             
+  10          code unsigned char seven_seg[13] = {0xc0,0xf9,0xa4,0xb0,0x99,
+  11                              0x92,0x82,0xf8,0x80,0x90,0xbf,0xff,0x7f};     //数字0~9的显示方法
+  12          code unsigned char scan[8] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};   //位选数组
+  13          bit conv;
+  14          void get_ds1302_time(void)                          //获取1302的时间数据（时、分、秒），存入time1数组中
+  15          {
+  16   1        unsigned char d;
+  17   1        d = read_ds1302_add(0x81);                        //读秒
+  18   1        sec = BCD_DEC_conv(d);                          //得到秒  
+  19   1        d = read_ds1302_add(0x83);                        //读分
+  20   1        min = BCD_DEC_conv(d);                          //得到分
+  21   1        d = read_ds1302_add(0x85);                        //读小时
+  22   1        hour = BCD_DEC_conv(d);                         //得到小时
+  23   1        d = read_ds1302_add(0x87);                        //读日
+  24   1        date = BCD_DEC_conv(d);                         //得到日
+  25   1          d = read_ds1302_add(0x89);                        //读月
+  26   1        month = BCD_DEC_conv(d);                        //得到月
+  27   1        d = read_ds1302_add(0x8b);                        //读星期
+  28   1        week = BCD_DEC_conv(d);                         //得到星期
+  29   1        d = read_ds1302_add(0x8d);                        //读年
+  30   1        year = BCD_DEC_conv(d);                         //得到年    
+  31   1      }
+  32          
+  33          void send(unsigned int x,unsigned int y)                  //x表示位选，y表示段选
+  34          {
+  35   1        P1_0 = 0;
+  36   1        P1_0 = 1;
+  37   1        P0 = scan[x];
+  38   1        P1_0 = 0;                               //P1.0端口高电平允许存储，P1.0为低电平保存存储
+  39   1        P0 = seven_seg[y];      
+  40   1      }
+  41          void time0_isr(void) interrupt 1                      //利用中断对数码管上显示的数据进行刷新
+  42          {
+  43   1        TH0 = (65536 - 2000) / 256; 
+  44   1        TL0 = (65536 - 2000) % 256;
+  45   1        cp1++;
+  46   1        if(cp1 >= 250)                              //0.5秒
+  47   1        {
+  48   2          cp1 = 0;
+  49   2          flash = !flash;                           //产生小数点闪烁变量
+  50   2          cp2++;
+  51   2          if(cp2 >= 5)
+  52   2          {  
+  53   3            cp2 = 0;
+  54   3            conv = !conv;                       //产生交替显示变量  
+  55   3          } 
+C51 COMPILER V9.56.0.0   MAIN                                                              11/24/2017 22:21:38 PAGE 2   
+
+  56   2        }
+  57   1        if(conv == 1)
+  58   1        {
+  59   2          P0 = 0xff;
+  60   2          switch(cp3)
+  61   2          {
+  62   3            case 0: send(0,sec % 10);break;               //显示秒个位
+  63   3            case 1: send(1,sec / 10);break;               //显示秒十位
+  64   3            case 2: if(flash)send(2,11);                //不显示
+  65   3                else send(2,10);break;                //显示“-”
+  66   3            case 3: send(3,min % 10);break;               //显示分个位
+  67   3            case 4: send(4,min / 10);break;               //显示分十位
+  68   3            case 5: if(flash)send(5,11);                //不显示
+  69   3                else send(5,10);break;                //显示“-”
+  70   3            case 6: send(6,hour % 10);break;              //显示小时个位
+  71   3            case 7: send(7,hour / 10);break;              //显示小时十位    
+  72   3          }
+  73   2        }
+  74   1        else
+  75   1        { 
+  76   2          P0 = 0xff;
+  77   2          switch(cp3)
+  78   2          {
+  79   3            case 0: send(0,date % 10);break;                //显示天个位
+  80   3            case 1: send(1,date / 10);break;                //显示天十位
+  81   3            case 2: send(2,month % 10);break;               //显示月个位,
+  82   3            case 3: send(3,month / 10);break;               //显示月十位
+  83   3            case 4: send(4,year % 10);break;                //显示年个位
+  84   3            case 5: send(5,year / 10);break;                //显示年十位
+  85   3            case 6: send(6,0);break;                    //显示“0”
+  86   3            case 7: send(7,2);break;                    //显示“2”
+  87   3          }
+  88   2        }  
+  89   1        cp3++;
+  90   1        if(cp3 >= 8)cp3 = 0;    
+  91   1      }
+  92          void timer0_init(void)                            //Timer0初始化
+  93          {
+  94   1        TMOD = 0x01;
+  95   1        TH0 = (65536 - 2000) / 256; 
+  96   1        TL0 = (65536 - 2000) % 256;
+  97   1        TR0 = 1;
+  98   1        ET0 = 1;
+  99   1        EA  = 1;
+ 100   1      }
+ 101          void main(void)
+ 102          {
+ 103   1        unsigned char i = 46;                             //举例，比如要调整时间，分钟设定为46分
+ 104   1        i = DEC_BCD_conv(i);
+ 105   1        timer0_init();
+ 106   1        write_ds1302_add_dat(0x8e,0x00);                    //写操作，可以对DS1302调整
+ 107   1        write_ds1302_add_dat(0x80,0x30);                    //写秒，30秒
+ 108   1        write_ds1302_add_dat(0x82,i);                     //写分，46分
+ 109   1        write_ds1302_add_dat(0x84,0x12);                    //写时，12时
+ 110   1        write_ds1302_add_dat(0x86,0x28);                    //写日，28日
+ 111   1        write_ds1302_add_dat(0x88,0x05);                    //写月，5月 
+ 112   1        write_ds1302_add_dat(0x8a,0x03);                    //写星期，星期三
+ 113   1        write_ds1302_add_dat(0x8c,0x12);                    //写年，（20）12年
+ 114   1        write_ds1302_add_dat(0x8e,0x80);                    //写保护
+ 115   1        get_ds1302_time();
+ 116   1        while(1);
+ 117   1      }
+C51 COMPILER V9.56.0.0   MAIN                                                              11/24/2017 22:21:38 PAGE 3   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    696    ----
+   CONSTANT SIZE    =     21    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

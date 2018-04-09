@@ -1,0 +1,39 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              04/09/2018 11:41:17 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit LED = P0^0;      //LED接P0.0
+   3          void delay(unsigned int x)       //延时函数
+   4          {
+   5   1        while(x--);
+   6   1      }
+   7          void main()              //主函数
+   8          {
+   9   1        while(1)
+  10   1        {
+  11   2        LED=0;                    //P0.0输出低电平，LED灭
+  12   2        delay(5000);               //调用延时函数，延时一段时间
+  13   2        LED=1;                  //P0.0输出高电平，LED亮
+  14   2        delay(5000);               //调用延时函数，延时一段时间
+  15   2        }
+  16   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     31    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

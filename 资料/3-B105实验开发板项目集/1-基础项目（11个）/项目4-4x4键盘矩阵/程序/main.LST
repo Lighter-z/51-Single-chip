@@ -1,0 +1,82 @@
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 17:33:36 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //4*4键盘矩阵按键
+   2          //按键按下显示键值，不按显示“88”
+   3          //河南科技学院-单片机协会，2016年10月9日                 
+   4          #include<reg51.h>
+   5          sbit P3_0 = P3^0;
+   6          code unsigned char seven_seg[10] = {0xc0,0xf9,0xa4,0xb0,0x99,
+   7                                                                                  0x92,0x82,0xf8,0x80,0x90,};
+   8          code unsigned char key_scan[] = {0xef,0xdf,0xbf,0x7f,};
+   9          code unsigned char key_num[] =  {
+  10                                                                                  0xee,0xed,0xeb,0xe7,
+  11                                                                                  0xde,0xdd,0xdb,0xd7,
+  12                                                                                  0xbe,0xbd,0xbb,0xb7,
+  13                                                                                  0x7e,0x7d,0x7b,0x77,
+  14                                                                          }; //按键按下的键值
+  15          
+  16          void delay(unsigned int x)                                      //延时函数
+  17          {
+  18   1              while(x--);
+  19   1      }
+  20          void display(unsigned char x)                           //显示函数
+  21          {       
+  22   1              P0 = 0xff;                                                              //刷新P0口（消隐）
+  23   1              P3_0 = 0;P0 = 0x01;P3_0 = 1;P3_0 = 0;
+  24   1              P0 = seven_seg[x % 10];                                 //显示按键编号的个位
+  25   1              delay(300);                                                             //让个位显示一段时间
+  26   1              P0 = 0xff;                                                                      //刷新P0口（消隐）
+  27   1              P3_0 = 0;P0 = 0x02;P3_0 = 1;P3_0 = 0;
+  28   1              P0 = seven_seg[x / 10];                                 //显示按键编号的十位
+  29   1              delay(300);                                                             //让十位显示一段时间
+  30   1      }
+  31          unsigned char key(void)                                         //按键函数
+  32          {
+  33   1              unsigned char i,j;
+  34   1              for(i = 0;i < 4;i++)
+  35   1              {
+  36   2                      P2 = key_scan[i];
+  37   2                      if(P2 != key_scan[i])
+  38   2                      {
+  39   3                              delay(500);                                                     //消除键抖后，有按键确实按下
+  40   3                              if(P2 != key_scan[i]);                          //如果有按键按下，P2口不是原来扫描数据
+  41   3                              for(j = 0;j < 16;j++)                           //让键盘行线输出扫描数据
+  42   3                              {
+  43   4                                      if(P2 == key_num[j])return(j);  //判断键值,返回按键的编号                               
+  44   4                              } 
+  45   3                      }
+  46   2              }
+  47   1              return(88);                     //如果没有按键按下，输出标准"88"
+  48   1      }
+  49          void main(void)                 //主函数
+  50          {
+  51   1              unsigned char k;
+  52   1              while(1)
+  53   1              {
+  54   2                      k = key();
+  55   2                      display(k);
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 17:33:36 PAGE 2   
+
+  56   2              }                       
+  57   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    122    ----
+   CONSTANT SIZE    =     30    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

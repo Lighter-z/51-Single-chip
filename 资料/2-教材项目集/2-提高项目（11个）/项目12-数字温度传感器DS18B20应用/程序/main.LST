@@ -1,0 +1,126 @@
+C51 COMPILER V9.00   MAIN                                                                  05/11/2017 09:49:53 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\KEIL\keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //数字温度传感器应用，教材和B105型实验开发板通用
+   2          //实时读取并且显示温度
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<ds18b20.c>     
+   6          sbit P1_0 = P1^0;       
+   7          code  uchar seven_seg[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};                  //共阳极数码管数显编码
+   8          uchar cp1,cp2;
+   9          uint aa;
+  10          uint temp_num,temp_num1,temp_dot,temp;                                                                                                  //temp_num、temp_num1为温度整数部分，temp_dot小数部分，
+             -中间变量temp
+  11          void timer0_init(void)                                                                                                                                  //中断服务函数   
+  12          {
+  13   1              TMOD = 0x01;
+  14   1              TH0 = (65536 - 2000) / 256;
+  15   1              TL0 = (65536 - 2000) % 256;
+  16   1              TR0 = 1;
+  17   1              EA  = 1;
+  18   1              ET0 = 1;
+  19   1      }
+  20          void timer0_isr(void) interrupt 1                                                                                                               //中断服务函数                  
+  21          {
+  22   1              TH0 = (65536 - 2000) / 256;
+  23   1              TL0 = (65536 - 2000) % 256;
+  24   1              cp1++;
+  25   1              if(cp1 >= 250)                                                                                                          //1秒
+  26   1         {
+  27   2                      cp1 = 0;
+  28   2                      temp_num = Read_Temperature();                                                                                                  //得到温度整数
+  29   2                      temp_dot =  c * 0.625;                                                                                                                  //得到温度小数
+  30   2                      if((temp_num & 0x80) == 0x80)                                                                                                   //如果温度为负值
+  31   2                      {       
+  32   3                              temp_dot = (0x0f - c) * 0.625;                                                                                          //补码转换原码，小数处理
+  33   3                              temp_num1 = 0xff - temp_num;                                                                                            //补码转换原码，整数处理        
+  34   3                      }
+  35   2                      else temp_num1 = temp_num;                                                                                                              //小数转换为十进制
+  36   2              }
+  37   1              P0 = 0xff;
+  38   1              switch(cp2)
+  39   1              {
+  40   2                      case 0: P0 = 0xff;                                                                                                                              //消隐
+  41   2                                      P1_0 = 0;P0 = 0x01;P1_0 = 1;P1_0 = 0;
+  42   2                                      P0 = seven_seg[temp_dot]; break;                                                                                //小数部分显示
+  43   2                      case 1: P0 = 0xff;
+  44   2                                      P1_0 = 0;P0 = 0x02;P1_0 = 1;P1_0 = 0;
+  45   2                                      P0 = 0x7f & seven_seg[temp_num1 % 10%10]; break;                                                //整数部分各位显示
+  46   2                      case 2:
+  47   2                              {       
+  48   3                                      if(temp_num < 10)
+  49   3                                      {
+  50   4                                              P0 = 0xff;
+  51   4                                              P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;
+  52   4                                              P0 = 0xff; break;
+  53   4                                      }                                                                                                                                               //如果温度小于10度，且为正值，十位0不显示
+  54   3                                      if((temp_num > 0x80) && ( temp_num1 < 10))
+C51 COMPILER V9.00   MAIN                                                                  05/11/2017 09:49:53 PAGE 2   
+
+  55   3                                      {
+  56   4                                              P0 = 0xff;
+  57   4                                              P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;
+  58   4                                              P0 = 0xbf; break;
+  59   4                                      }                                                                                                                                               //如果温度小于10度，且为负值，十位0不显示，只显示"-"
+  60   3                                              P0 = 0xff;
+  61   3                                              P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;
+  62   3                                              P0 = seven_seg[temp_num1 / 10%10]; break;                                                       //如果温度大于10度，10位正常显示
+  63   3                              }
+  64   2                      case 3:
+  65   2                              {
+  66   3                                      if((temp_num < 0x80) && (temp_num1 >= 100))
+  67   3                                      {               
+  68   4                                              P0 = 0xff;
+  69   4                                              P1_0 = 0;
+  70   4                                              P0 = 0x08;
+  71   4                                              P1_0 = 1;
+  72   4                                              P1_0 = 0;
+  73   4                                              P0 = seven_seg[temp_num1 / 100]; break;                                                         //如果温度为负值，且十位不为0，百位显示"-"
+  74   4                                      }
+  75   3                              
+  76   3                              }
+  77   2                      case 4:
+  78   2                              {
+  79   3                                      if((temp_num > 0x80) && ((temp_num1 / 10) > 0))
+  80   3                                      {
+  81   4                                              P0 = 0xff;
+  82   4                                              P1_0 = 0;P0 = 0x08;P1_0 = 1;P1_0 = 0;
+  83   4                                              P0 = 0xbf; break;                                                                                                       //如果温度为负值，且十位不为0，百位显示"-"
+  84   4                                      }
+  85   3                              }
+  86   2              }
+  87   1              cp2++;
+  88   1              if(cp2 >= 5)
+  89   1              cp2=0;
+  90   1      }
+  91          void main(void) 
+  92          {
+  93   1              timer0_init();
+  94   1              write_temprom(128,-55);                                                                                                                         //向18B20的暂存写上、下限温度分别为128，-55
+  95   1              Write_OneChar(0x48);                                                                                                                            //向18B20的rom中写数据          
+  96   1              while(1)
+  97   1              {
+  98   2                      temp = read_temprom;                                                                                                                    //将从DS18B20中读取的温度给变量temp 
+  99   2              }
+ 100   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    757    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

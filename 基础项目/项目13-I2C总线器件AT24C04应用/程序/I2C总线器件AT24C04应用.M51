@@ -1,0 +1,249 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/14/2017  20:36:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\安装目录\KEIL4\C51\BIN\BL51.EXE main.obj TO I2C总线器件AT24C04应用
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  D:\安装目录\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  I2C总线器件AT24C04应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     002FH     UNIT         ?PR?MAIN?MAIN
+            CODE    0032H     001DH     UNIT         ?PR?ACK_24C04?MAIN
+            CODE    004FH     001CH     UNIT         ?PR?_READ_ADD_DAT_24C04?MAIN
+            CODE    006BH     001BH     UNIT         ?PR?READ_ONEBYTE_24C04?MAIN
+            CODE    0086H     0017H     UNIT         ?PR?_WRITE_ONEBYTE_24C04?MAIN
+            CODE    009DH     0015H     UNIT         ?PR?_WRITE_ADD_DAT_24C04?MAIN
+            CODE    00B2H     0014H     UNIT         ?PR?_DELAY?MAIN
+            CODE    00C6H     000CH     UNIT         ?PR?START_24C04?MAIN
+            CODE    00D2H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00DEH     000AH     UNIT         ?PR?STOP_24C04?MAIN
+            CODE    00E8H     0007H     UNIT         ?PR?INIT_24C04?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   I2C总线器件AT24C04应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?INIT_24C04?MAIN
+  +--> ?PR?_DELAY?MAIN
+  +--> ?PR?_READ_ADD_DAT_24C04?MAIN
+
+?PR?_DELAY?MAIN
+  +--> ?PR?_WRITE_ADD_DAT_24C04?MAIN
+
+?PR?_WRITE_ADD_DAT_24C04?MAIN
+  +--> ?PR?START_24C04?MAIN
+  +--> ?PR?_WRITE_ONEBYTE_24C04?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2017  20:36:51  PAGE 2
+
+
+  +--> ?PR?ACK_24C04?MAIN
+  +--> ?PR?STOP_24C04?MAIN
+
+?PR?ACK_24C04?MAIN
+  +--> ?PR?_WRITE_ONEBYTE_24C04?MAIN
+
+?PR?_READ_ADD_DAT_24C04?MAIN
+  +--> ?PR?START_24C04?MAIN
+  +--> ?PR?ACK_24C04?MAIN
+  +--> ?PR?_WRITE_ONEBYTE_24C04?MAIN
+  +--> ?PR?READ_ONEBYTE_24C04?MAIN
+  +--> ?PR?STOP_24C04?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  I2C总线器件AT24C04应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00B0H         PUBLIC        P3
+  C:006BH         PUBLIC        read_onebyte_24c04
+  C:00BBH         PUBLIC        _delay
+  C:0086H         PUBLIC        _write_onebyte_24c04
+  C:0003H         PUBLIC        main
+  B:00B0H.6       PUBLIC        sda
+  C:003DH         PUBLIC        ack_24c04
+  C:00C6H         PUBLIC        start_24c04
+  B:00B0H.7       PUBLIC        scl
+  C:00E8H         PUBLIC        init_24c04
+  C:004FH         PUBLIC        _read_add_dat_24c04
+  C:00DEH         PUBLIC        stop_24c04
+  C:009DH         PUBLIC        _write_add_dat_24c04
+  -------         PROC          START_24C04
+  C:00C6H         LINE#         7
+  C:00C6H         LINE#         8
+  C:00C6H         LINE#         9
+  C:00C9H         LINE#         10
+  C:00CCH         LINE#         11
+  C:00CFH         LINE#         12
+  C:00D1H         LINE#         13
+  -------         ENDPROC       START_24C04
+  -------         PROC          STOP_24C04
+  C:00DEH         LINE#         15
+  C:00DEH         LINE#         16
+  C:00DEH         LINE#         17
+  C:00E1H         LINE#         18
+  C:00E4H         LINE#         19
+  C:00E7H         LINE#         20
+  -------         ENDPROC       STOP_24C04
+  -------         PROC          L?0025
+  -------         ENDPROC       L?0025
+  -------         PROC          ACK_24C04
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2017  20:36:51  PAGE 3
+
+
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:003DH         LINE#         22
+  C:003DH         LINE#         23
+  C:003DH         LINE#         24
+  C:003FH         LINE#         25
+  C:0042H         LINE#         26
+  C:004BH         LINE#         27
+  C:004EH         LINE#         28
+  -------         ENDPROC       ACK_24C04
+  -------         PROC          INIT_24C04
+  C:00E8H         LINE#         30
+  C:00E8H         LINE#         31
+  C:00E8H         LINE#         32
+  C:00EBH         LINE#         33
+  C:00EEH         LINE#         34
+  -------         ENDPROC       INIT_24C04
+  -------         PROC          READ_ONEBYTE_24C04
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0007H         SYMBOL        dat
+  -------         ENDDO         
+  C:006BH         LINE#         36
+  C:006BH         LINE#         37
+  C:006BH         LINE#         39
+  C:006DH         LINE#         40
+  C:006FH         LINE#         41
+  C:006FH         LINE#         42
+  C:0071H         LINE#         43
+  C:0075H         LINE#         44
+  C:0078H         LINE#         45
+  C:007BH         LINE#         46
+  C:007DH         LINE#         47
+  C:0081H         LINE#         48
+  C:0083H         LINE#         49
+  C:0085H         LINE#         50
+  C:0085H         LINE#         51
+  -------         ENDPROC       READ_ONEBYTE_24C04
+  -------         PROC          _WRITE_ONEBYTE_24C04
+  D:0007H         SYMBOL        dat
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0086H         LINE#         53
+  C:0086H         LINE#         54
+  C:0086H         LINE#         56
+  C:0088H         LINE#         57
+  C:0088H         LINE#         58
+  C:008CH         LINE#         59
+  C:0090H         LINE#         60
+  C:0092H         LINE#         61
+  C:0094H         LINE#         62
+  C:0098H         LINE#         63
+  C:009AH         LINE#         64
+  C:009CH         LINE#         65
+  -------         ENDPROC       _WRITE_ONEBYTE_24C04
+  -------         PROC          _WRITE_ADD_DAT_24C04
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2017  20:36:51  PAGE 4
+
+
+  D:0003H         SYMBOL        add
+  D:0004H         SYMBOL        dat
+  C:009DH         LINE#         67
+  C:009FH         LINE#         68
+  C:009FH         LINE#         69
+  C:00A2H         LINE#         70
+  C:00A7H         LINE#         71
+  C:00AAH         LINE#         72
+  C:00ACH         LINE#         73
+  C:00ACH         LINE#         74
+  C:00ACH         LINE#         75
+  C:00AFH         LINE#         76
+  -------         ENDPROC       _WRITE_ADD_DAT_24C04
+  -------         PROC          _READ_ADD_DAT_24C04
+  D:0005H         SYMBOL        add
+  -------         DO            
+  D:0007H         SYMBOL        dat
+  -------         ENDDO         
+  C:004FH         LINE#         79
+  C:0051H         LINE#         80
+  C:0051H         LINE#         82
+  C:0054H         LINE#         83
+  C:0056H         LINE#         84
+  C:0056H         LINE#         85
+  C:0056H         LINE#         86
+  C:0059H         LINE#         87
+  C:005CH         LINE#         88
+  C:0061H         LINE#         89
+  C:0064H         LINE#         90
+  C:0067H         LINE#         91
+  C:006AH         LINE#         92
+  C:006AH         LINE#         93
+  -------         ENDPROC       _READ_ADD_DAT_24C04
+  -------         PROC          L?0026
+  -------         ENDPROC       L?0026
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:00BBH         LINE#         3
+  C:00BBH         LINE#         4
+  C:00BBH         LINE#         5
+  C:00C5H         LINE#         6
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0003H         LINE#         7
+  C:0003H         LINE#         8
+  C:0003H         LINE#         9
+  C:0006H         LINE#         10
+  C:0006H         LINE#         11
+  C:0006H         LINE#         12
+  C:000AH         LINE#         13
+  C:000DH         LINE#         14
+  C:0011H         LINE#         15
+  C:0014H         LINE#         16
+  C:001BH         LINE#         17
+  C:0022H         LINE#         18
+  C:0029H         LINE#         19
+  C:0030H         LINE#         20
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2017  20:36:51  PAGE 5
+
+
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=239
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,89 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/07/2017  15:59:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\安装目录\KEIL4\C51\BIN\BL51.EXE 流水灯.obj TO 流水灯
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  流水灯.obj (流水灯)
+  D:\安装目录\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  流水灯 (流水灯)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         _DATA_GROUP_
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001DH     UNIT         ?PR?MAIN?流水灯
+            CODE    0020H     000CH     UNIT         ?C_C51STARTUP
+            CODE    002CH     000BH     UNIT         ?PR?_DELAY?流水灯
+            CODE    0037H     0008H     UNIT         ?CO?流水灯
+
+
+
+OVERLAY MAP OF MODULE:   流水灯 (流水灯)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?流水灯
+
+?PR?MAIN?流水灯                0008H    0001H
+  +--> ?CO?流水灯
+  +--> ?PR?_DELAY?流水灯
+
+
+
+SYMBOL TABLE OF MODULE:  流水灯 (流水灯)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        流水灯
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:002CH         PUBLIC        _delay
+  C:0003H         PUBLIC        main
+  C:0037H         PUBLIC        LED
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/07/2017  15:59:47  PAGE 2
+
+
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:002CH         LINE#         3
+  C:002CH         LINE#         4
+  C:002CH         LINE#         5
+  C:0036H         LINE#         6
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:0003H         LINE#         7
+  C:0003H         LINE#         8
+  C:0003H         LINE#         10
+  C:0003H         LINE#         11
+  C:0003H         LINE#         12
+  C:000BH         LINE#         13
+  C:0012H         LINE#         14
+  C:0014H         LINE#         15
+  C:001EH         LINE#         16
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        流水灯
+
+Program Size: data=10.0 xdata=0 code=63
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

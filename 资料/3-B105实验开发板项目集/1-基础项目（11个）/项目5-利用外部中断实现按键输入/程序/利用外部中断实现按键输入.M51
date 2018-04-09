@@ -1,0 +1,95 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        10/23/2016  18:24:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO 利用外部中断实现按键输入
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  利用外部中断实现按键输入 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     07FAH                  *** GAP ***
+            CODE    0800H     000CH     UNIT         ?C_C51STARTUP
+            CODE    080CH     0007H     UNIT         ?PR?INT0_INIT?MAIN
+            CODE    0813H     0005H     UNIT         ?PR?MAIN?MAIN
+            CODE    0818H     0003H     UNIT         ?PR?INT0_ISR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   利用外部中断实现按键输入 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?INT0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  利用外部中断实现按键输入 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:00A8H.7       PUBLIC        EA
+  C:080CH         PUBLIC        int0_init
+  C:0813H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/23/2016  18:24:23  PAGE 2
+
+
+  C:0818H         PUBLIC        int0_isr
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:0080H.0       PUBLIC        LED
+  -------         PROC          INT0_ISR
+  C:0818H         LINE#         6
+  C:0818H         LINE#         8
+  C:081AH         LINE#         9
+  -------         ENDPROC       INT0_ISR
+  -------         PROC          INT0_INIT
+  C:080CH         LINE#         10
+  C:080CH         LINE#         11
+  C:080CH         LINE#         12
+  C:080EH         LINE#         13
+  C:0810H         LINE#         14
+  C:0812H         LINE#         15
+  -------         ENDPROC       INT0_INIT
+  -------         PROC          MAIN
+  C:0813H         LINE#         17
+  C:0813H         LINE#         18
+  C:0813H         LINE#         19
+  C:0816H         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0012H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=33
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,60 @@
+C51 COMPILER V8.02   MAIN                                                                  07/24/2016 16:26:35 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //学习PWM波的占空比设定,针对B105型实验开发板设计
+   2          //15F单片机内部有3个PWM模块，利用编程的方法可以改变,利用模块0产生一个PWM波，从P1.1输出接示波器观察；
+   3          //设计：单片机创新工作室--冷恩鑫设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<15fpwm.c>
+   6          unsigned char cp1,cp2,pwm_num0,pwm_num1 = 100,pwm_num2 = 200;
+   7          xdata pwm_s;//占空比,占空间16位
+   8          void timer0_isr(void) interrupt 1
+   9          {
+  10   1              TH0 =  (65536 - 1000) / 256;
+  11   1              TL0 =  (65536 - 1000) % 256;
+  12   1              cp1++;
+  13   1              if(cp1 >= 100)//0.1毫秒
+  14   1              {
+  15   2                      pwm_num0++;
+  16   2                      if(pwm_num0 >= 256)pwm_num0 = 0;
+  17   2                      cp1 = 0;
+  18   2              }                       
+  19   1              CCAP0H =  pwm_num0;                     //P3.5输出
+  20   1              CCAP1H =  pwm_num1;             //P3.6输出
+  21   1              CCAP2H =  pwm_num2;                     //P3.7输出              
+  22   1      }
+  23          void timer0_init(void)
+  24          {
+  25   1              TMOD = 0x01;
+  26   1              TH0 =  (65536 - 1000) / 256;
+  27   1              TL0 =  (65536 - 1000) % 256;
+  28   1              EA = 1;
+  29   1              ET0 = 1;
+  30   1              TR0 = 1;
+  31   1      }
+  32          void main(void)
+  33          {
+  34   1              timer0_init();
+  35   1              STC_pwm_init();
+  36   1              while(1);
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    101    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      2    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

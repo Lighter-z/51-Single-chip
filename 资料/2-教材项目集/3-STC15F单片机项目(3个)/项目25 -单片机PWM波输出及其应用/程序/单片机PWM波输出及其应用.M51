@@ -1,0 +1,150 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  12:30:06  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 单片机PWM波输出及其应用
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  单片机PWM波输出及其应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?MAIN
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0002H     UNIT         ?XD?MAIN
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0026H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0034H     001BH     UNIT         ?PR?STC_PWM_INIT?MAIN
+            CODE    004FH     0012H     UNIT         ?PR?MAIN?MAIN
+            CODE    0061H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0071H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   单片机PWM波输出及其应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?PR?STC_PWM_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  单片机PWM波输出及其应用 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:06  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:000EH         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+  D:0009H         PUBLIC        cp2
+  B:00A8H.7       PUBLIC        EA
+  D:000AH         PUBLIC        pwm_num
+  D:00F9H         PUBLIC        CH
+  D:00E9H         PUBLIC        CL
+  D:00FAH         PUBLIC        CCAP0H
+  D:00DAH         PUBLIC        CCAPM0
+  D:00DBH         PUBLIC        CCAPM1
+  D:00DCH         PUBLIC        CCAPM2
+  D:00D9H         PUBLIC        CMOD
+  D:00D8H         PUBLIC        CCON
+  C:004FH         PUBLIC        main
+  X:0000H         PUBLIC        pwm_s
+  D:0089H         PUBLIC        TMOD
+  C:0034H         PUBLIC        STC_pwm_init
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00F2H         PUBLIC        PCA_PMW0
+  D:00F3H         PUBLIC        PCA_PMW1
+  D:00F4H         PUBLIC        PCA_PMW2
+  C:0061H         PUBLIC        timer0_init
+  -------         PROC          STC_PWM_INIT
+  C:0034H         LINE#         21
+  C:0034H         LINE#         22
+  C:0034H         LINE#         23
+  C:0037H         LINE#         24
+  C:003AH         LINE#         25
+  C:003CH         LINE#         27
+  C:003EH         LINE#         28
+  C:0041H         LINE#         30
+  C:0043H         LINE#         31
+  C:0046H         LINE#         33
+  C:0048H         LINE#         34
+  C:004BH         LINE#         35
+  C:004EH         LINE#         36
+  -------         ENDPROC       STC_PWM_INIT
+  -------         PROC          TIMER0_ISR
+  C:000EH         LINE#         8
+  C:0012H         LINE#         10
+  C:0015H         LINE#         11
+  C:0018H         LINE#         12
+  C:001AH         LINE#         13
+  C:0021H         LINE#         14
+  C:0021H         LINE#         15
+  C:0023H         LINE#         16
+  C:002CH         LINE#         17
+  C:002FH         LINE#         18
+  C:002FH         LINE#         19
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:0061H         LINE#         20
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:30:06  PAGE 3
+
+
+  C:0061H         LINE#         21
+  C:0061H         LINE#         22
+  C:0064H         LINE#         23
+  C:0067H         LINE#         24
+  C:006AH         LINE#         25
+  C:006CH         LINE#         26
+  C:006EH         LINE#         27
+  C:0070H         LINE#         28
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:004FH         LINE#         29
+  C:004FH         LINE#         30
+  C:004FH         LINE#         31
+  C:0052H         LINE#         32
+  C:0055H         LINE#         33
+  C:0055H         LINE#         34
+  C:0055H         LINE#         35
+  C:005CH         LINE#         36
+  C:005CH         LINE#         37
+  C:005FH         LINE#         40
+  C:005FH         LINE#         41
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=12.0 xdata=2 code=117
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

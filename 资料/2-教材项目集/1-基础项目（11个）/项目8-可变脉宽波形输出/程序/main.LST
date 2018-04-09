@@ -1,0 +1,50 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 11:12:35 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //可变脉宽波形输出，针对B105型实验开发板设计
+   2          //定一个周期，自动调整脉宽
+   3          //设计：单片机创新工作室--许敬东设计 ，2015年12月15日
+   4          #include<reg51.h>
+   5          sbit P1_7 = P1^7;
+   6          unsigned char cp1,cp2,tt;
+   7          void timer0_init(void)                                                                  //中断初试化函数
+   8          {
+   9   1              TMOD = 0x02;                                                                            //T0工作方式2
+  10   1              TL0 = 156;                                              
+  11   1              TH0 = 156;                                                                                      //给定时器赋值
+  12   1              EA = 1;                                                                                         //开总中断
+  13   1              ET0  = 1;                                                                                       //开T0中断
+  14   1              TR0 = 1;                                                                                        //启动定时器T0
+  15   1      }
+  16          void timer0_isr(void) interrupt 1                                               //中断服务函数
+  17          {
+  18   1              cp1++;cp2++;                                                                            //设置局部变量
+  19   1              if(cp1++ >= tt)P1_7 = 1;
+  20   1              if(cp1++ >= 20){P1_7 = 0;cp1 = 0;}
+  21   1              if(cp2 >= 255){cp2 = 0;tt++;if(tt >= 20) tt = 0;}
+  22   1      }
+  23          void main()
+  24          {
+  25   1              timer0_init();                                                                          //中断初始化
+  26   1              while(1);
+  27   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     89    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

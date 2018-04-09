@@ -1,0 +1,47 @@
+C51 COMPILER V9.02   MAIN                                                                  10/09/2016 20:23:47 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //单片机内部看门狗应用，教材和B105型实验开发板通用
+   2          //启动看门狗，设定看门狗溢出时间为一秒，若看门狗溢出后复位，LED灯不停闪烁       
+   3          //河南科技学院-单片机协会，2016年10月9日                 
+   4          #include<reg51.h>
+   5          #define uint unsigned int
+   6          #define uchar unsigned char
+   7          sfr WDT_CONTR = 0xe1;                   //定义单片机内部看门狗寄存器
+   8          sbit LED = P0^0;
+   9          void delay(uint x)
+  10          {
+  11   1              while(x--);
+  12   1      }
+  13          void main(void)
+  14          {
+  15   1              WDT_CONTR = 0x24;                       //启动看门狗，设定看门狗溢出时间为一秒  
+  16   1              while(1)
+  17   1              {
+  18   2                      //WDT_CONTR = 0x14;             //喂狗，若屏蔽此句，则看门狗溢出后复位，LED灯不停闪烁
+  19   2                      LED = 1;
+  20   2                      delay(50000);
+  21   2                      LED = 0;
+  22   2                      delay(50000);   ;
+  23   2              }
+  24   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

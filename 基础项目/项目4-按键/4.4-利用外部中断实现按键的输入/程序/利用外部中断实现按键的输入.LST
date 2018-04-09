@@ -1,0 +1,40 @@
+C51 COMPILER V9.00   利用蚠部_卸鲜迪__醇氖_入                                            05/07/2017 18:48:43 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 利用蚠部_卸鲜迪__醇氖_入
+OBJECT MODULE PLACED IN 利用外部中断实现按键的输入.OBJ
+COMPILER INVOKED BY: D:\安装目录\keil4\C51\BIN\C51.EXE 利用外部中断实现按键的输入.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit led = P2^0;
+   3          void it0_isr()interrupt 0         //中断服务函数
+   4          {
+   5   1              led = !led;                              
+   6   1      }
+   7          void it0_init()                 //中断初始化
+   8          {
+   9   1              EA = 1;                         //总中断开
+  10   1              EX0 = 1;                        //IT0中断开
+  11   1              IT0 = 1;                   //TCON中控制INT0触发方式位，INT0下降沿触发中断
+  12   1      }
+  13          void main()
+  14          {
+  15   1              it0_init();        //等待中断
+  16   1              while(1);
+  17   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

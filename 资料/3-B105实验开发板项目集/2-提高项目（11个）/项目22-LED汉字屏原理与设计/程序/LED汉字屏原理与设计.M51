@@ -1,0 +1,158 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  12:13:53  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO LED汉字屏原理与设计
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  LED汉字屏原理与设计 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0040H     UNIT         ?CO?MAIN
+            CODE    0043H     002FH     UNIT         ?PR?_DAT595?MAIN
+            CODE    0072H     002BH     UNIT         ?PR?MAIN?MAIN
+            CODE    009DH     0013H     UNIT         ?PR?SHUCHU?MAIN
+            CODE    00B0H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00BCH     0007H     UNIT         ?PR?SUOCUN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   LED汉字屏原理与设计 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?SHUCHU?MAIN
+
+?PR?SHUCHU?MAIN
+  +--> ?PR?_DAT595?MAIN
+  +--> ?PR?SUOCUN?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  LED汉字屏原理与设计 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:13:53  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A0H.1       PUBLIC        ds1
+  B:00A0H.6       PUBLIC        ds2
+  C:00A7H         PUBLIC        shuchu
+  B:00A0H.3       PUBLIC        OE
+  C:00BCH         PUBLIC        suocun
+  C:0072H         PUBLIC        main
+  C:0003H         PUBLIC        dat
+  C:0043H         PUBLIC        _dat595
+  B:00A0H.0       PUBLIC        sh_cp1
+  B:00A0H.5       PUBLIC        sh_cp2
+  B:00A0H.2       PUBLIC        st_cp1
+  B:00A0H.7       PUBLIC        st_cp2
+  B:00A0H.4       PUBLIC        e
+  -------         PROC          _DAT595
+  D:0007H         SYMBOL        as
+  D:0005H         SYMBOL        bs
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        b
+  -------         ENDDO         
+  C:0043H         LINE#         31
+  C:0043H         LINE#         32
+  C:0043H         LINE#         34
+  C:0045H         LINE#         35
+  C:0045H         LINE#         36
+  C:0047H         LINE#         37
+  C:0047H         LINE#         38
+  C:004BH         LINE#         39
+  C:004DH         LINE#         40
+  C:0050H         LINE#         41
+  C:0052H         LINE#         42
+  C:0056H         LINE#         43
+  C:005AH         LINE#         44
+  C:005CH         LINE#         45
+  C:005EH         LINE#         46
+  C:005EH         LINE#         47
+  C:0062H         LINE#         48
+  C:0064H         LINE#         49
+  C:0067H         LINE#         50
+  C:0069H         LINE#         51
+  C:006DH         LINE#         52
+  C:0071H         LINE#         53
+  -------         ENDPROC       _DAT595
+  -------         PROC          L?0019
+  -------         ENDPROC       L?0019
+  -------         PROC          SHUCHU
+  C:00A7H         LINE#         54
+  C:00A7H         LINE#         55
+  C:00A7H         LINE#         56
+  C:00A9H         LINE#         57
+  C:00ABH         LINE#         58
+  C:00ADH         LINE#         59
+  C:00AFH         LINE#         60
+  -------         ENDPROC       SHUCHU
+  -------         PROC          SUOCUN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:13:53  PAGE 3
+
+
+  C:00BCH         LINE#         61
+  C:00BCH         LINE#         62
+  C:00BCH         LINE#         63
+  C:00BEH         LINE#         64
+  C:00C0H         LINE#         65
+  C:00C2H         LINE#         66
+  -------         ENDPROC       SUOCUN
+  -------         PROC          MAIN
+  -------         DO            
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0072H         LINE#         67
+  C:0072H         LINE#         68
+  C:0072H         LINE#         70
+  C:0072H         LINE#         71
+  C:0072H         LINE#         72
+  C:0074H         LINE#         73
+  C:0076H         LINE#         74
+  C:0078H         LINE#         75
+  C:0078H         LINE#         76
+  C:0080H         LINE#         77
+  C:0080H         LINE#         78
+  C:0083H         LINE#         79
+  C:0087H         LINE#         80
+  C:008FH         LINE#         81
+  C:008FH         LINE#         82
+  C:0097H         LINE#         83
+  C:0097H         LINE#         84
+  C:009AH         LINE#         85
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=195
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

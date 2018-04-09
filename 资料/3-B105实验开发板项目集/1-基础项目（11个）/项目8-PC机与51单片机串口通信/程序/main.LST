@@ -1,0 +1,51 @@
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 18:03:56 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //串口通信
+   2          //计算机通过串口调试助手向实验开发板发送一个数据，开发板接收后返回这个数据
+   3          //河南科技学院-单片机协会，2016年10月9日                 
+   4          #include<reg51.h>
+   5          void s_init(void)
+   6          {
+   7   1              SCON = 0x50;    //设置串口通信控制寄存器，工作方式1，允许串口接收数据
+   8   1              TMOD = 0x20;    //设定定时器T1，工作方式2，自动装初值
+   9   1              TH1 = 0xfd;             //设定波特率为9600bps，工作方式2，自动装初值，9600
+  10   1              TL1 = 0xfd;
+  11   1              TR1 = 1;
+  12   1      }
+  13          void main(void)
+  14          {
+  15   1              unsigned char i;
+  16   1              s_init(); 
+  17   1              P0 = 0x00;              //初始化LED灯
+  18   1              while(1)
+  19   1              {
+  20   2                      while(!RI);     //等待接收
+  21   2                      i = SBUF;       //接收的数据给i 
+  22   2                      //P0 = i;       //通过发送的数据控制LED灯       
+  23   2                      RI = 0;         //RI软件清零
+  24   2                      SBUF = i;       //返回单片机接受的数据
+  25   2                      while(!TI);     //等待发送
+  26   2                      TI = 0;         //TI软件清零
+  27   2              }
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     37    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,44 @@
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 18:24:23 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //外部中断应用
+   2          //利用一个按键产生下降沿，触发单片机的外部中断INT0
+   3          //河南科技学院-单片机协会，2016年10月9日                 
+   4          #include<reg51.h>
+   5          sbit LED = P0^0;
+   6          void int0_isr(void) interrupt 0 //INT0中断服务函数
+   7          {
+   8   1              LED = !LED;
+   9   1      }
+  10          void int0_init(void) //INT0中断初始化
+  11          {
+  12   1              IT0 = 1;
+  13   1              EA = 1;
+  14   1              EX0 = 1;
+  15   1      }
+  16          
+  17          void main()
+  18          {
+  19   1              int0_init();    //INT0中断初始化
+  20   1              while(1);
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

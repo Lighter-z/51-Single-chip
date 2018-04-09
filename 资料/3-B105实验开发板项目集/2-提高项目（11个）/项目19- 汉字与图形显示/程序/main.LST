@@ -1,0 +1,60 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 12:02:42 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //LCD1286液晶屏显示，针对B105型实验开发板设计
+   2          //第一屏显示图片，的二屏显示文字
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include"LCD12864.c"
+   5          #include <intrins.h>
+   6          void Delay1000ms()                                              //@11.0592MHz
+   7          {
+   8   1              unsigned char i, j, k;
+   9   1              _nop_();
+  10   1              _nop_();
+  11   1              i = 43;
+  12   1              j = 6;
+  13   1              k = 203;
+  14   1              do
+  15   1              {
+  16   2                      do
+  17   2                      {
+  18   3                              while (--k);
+  19   3                      } while (--j);
+  20   2              } while (--i);
+  21   1      }
+  22          void main(void)
+  23          {
+  24   1              initinal();
+  25   1              gui_clear();
+  26   1              Display_Clear();
+  27   1              xianshi();                                                      //第一屏图片显示
+  28   1              Delay1000ms();  Delay1000ms();
+  29   1              gui_clear();
+  30   1              while(1)
+  31   1              {       
+  32   2                      lcd_mesg(1,1,12,"好人一生平安，");
+  33   2                      lcd_mesg(2,1,12,"祝你一帆风顺。");
+  34   2                      lcd_mesg(3,1,9,"123456789");
+  35   2                      lcd_mesg(4,1,12,"abcdefghij");  
+  36   2              }
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    861    ----
+   CONSTANT SIZE    =   1075    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      19
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

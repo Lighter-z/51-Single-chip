@@ -1,0 +1,120 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  11:03:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 8位数码管动态显示
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  8位数码管动态显示 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?MAIN
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?MAIN?MAIN
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     00B4H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    00C2H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    00D2H     000CH     UNIT         ?CO?MAIN
+            CODE    00DEH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   8位数码管动态显示 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0_ISR?MAIN
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  8位数码管动态显示 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  11:03:42  PAGE 2
+
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  C:000EH         PUBLIC        timer0_isr
+  B:00A8H.7       PUBLIC        EA
+  C:0003H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  C:00D2H         PUBLIC        seven_seg
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  C:00C2H         PUBLIC        timer0_init
+  D:0008H         PUBLIC        t
+  -------         PROC          TIMER0_ISR
+  C:000EH         LINE#         8
+  C:001BH         LINE#         10
+  C:001EH         LINE#         11
+  C:0021H         LINE#         12
+  C:0024H         LINE#         13
+  C:004DH         LINE#         14
+  C:004DH         LINE#         15
+  C:0059H         LINE#         16
+  C:0065H         LINE#         17
+  C:0071H         LINE#         18
+  C:007DH         LINE#         19
+  C:0089H         LINE#         20
+  C:0095H         LINE#         21
+  C:00A1H         LINE#         22
+  C:00ABH         LINE#         23
+  C:00ABH         LINE#         24
+  C:00B7H         LINE#         25
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:00C2H         LINE#         26
+  C:00C2H         LINE#         27
+  C:00C2H         LINE#         28
+  C:00C5H         LINE#         29
+  C:00C8H         LINE#         30
+  C:00CBH         LINE#         31
+  C:00CDH         LINE#         32
+  C:00CFH         LINE#         33
+  C:00D1H         LINE#         34
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:0003H         LINE#         35
+  C:0003H         LINE#         36
+  C:0003H         LINE#         37
+  C:0006H         LINE#         38
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=10.0 xdata=0 code=231
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

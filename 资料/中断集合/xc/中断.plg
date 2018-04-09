@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Administrator\Desktop\单片机学习\我自己的中断\xc\中断.uvproj
+Project File Date:  05/23/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=27.0 xdata=0 code=446
+creating hex file from "中断"...
+"中断" - 0 Error(s), 0 Warning(s).

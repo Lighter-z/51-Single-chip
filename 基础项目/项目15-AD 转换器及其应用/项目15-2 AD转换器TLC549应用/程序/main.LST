@@ -1,0 +1,71 @@
+C51 COMPILER V8.08   MAIN                                                                  05/21/2017 10:43:32 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          #include<TLC549.c>
+   5          code uchar seven_seg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90}; 
+   6          uchar cp1,cp2;
+   7          uint dat_ad;
+   8          /*T0初始化*/
+   9          void timer0_ier()interrupt 1
+  10          {
+  11   1              TL0 = (65536 - 5000) % 256;
+  12   1              TH0 = (65536 - 5000) / 256;
+  13   1              cp1++;
+  14   1              if(cp1 >= 100)                                                            //0.5s
+  15   1              {
+  16   2                      cp1 = 0;
+  17   2                      dat_ad = tlc549_ad();
+  18   2                      dat_ad = dat_ad * 1.96;                                   //数据255对应模拟电压5V
+  19   2              }
+  20   1              P0 = 0xff;
+  21   1              switch(cp2)
+  22   1              {
+  23   2                      case 0: P0 = seven_seg[dat_ad % 10];P2 = 0x01;break;
+  24   2                      case 1: P0 = seven_seg[dat_ad / 10 % 10];P2 = 0x02;break;
+  25   2                      case 2: P0 = seven_seg[dat_ad / 100] & 0x7f;P2 = 0x04;break;    //加上小数点
+  26   2              }
+  27   1              cp2++;
+  28   1              if(cp2 >= 3)
+  29   1              cp2 = 0;
+  30   1      }
+  31          /*中断服务函数*/
+  32          void timer0_init()
+  33          {
+  34   1              TMOD = 0x01;
+  35   1              TL0 = (65536 - 5000) % 256;
+  36   1              TH0 = (65536 - 5000) / 256;
+  37   1              ET0 = 1;
+  38   1              EA = 1;
+  39   1              TR0 = 1;
+  40   1      }
+  41          void main()
+  42          {
+  43   1              timer0_init();
+  44   1              tlc549_init();
+  45   1              while(1);
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    290    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V8.08   MAIN                                                                  05/21/2017 10:43:32 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

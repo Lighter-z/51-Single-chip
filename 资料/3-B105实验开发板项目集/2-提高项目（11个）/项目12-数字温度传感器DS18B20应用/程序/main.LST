@@ -1,0 +1,74 @@
+C51 COMPILER V8.02   MAIN                                                                  07/23/2008 18:36:01 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //数字温度传感器应用，教材和B105型实验开发板通用
+   2          //实时读取并且显示温度
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<ds18b20.c>     
+   6                  
+   7          code  uchar seven_seg[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};                  //共阳极数码管数显编码
+   8          uchar cp1;
+   9          uint cp;
+  10          sbit P3_0 = P3^0;                                                                                                       //temp_num、temp_num1为温度整数部分，temp_dot小数部分，中间变量temp
+  11          void timer0_init(void)                                                                                                                                  //中断服务函数   
+  12          {
+  13   1              TMOD = 0x01;
+  14   1              TH0 = (65536 - 2000) / 256;
+  15   1              TL0 = (65536 - 2000) % 256;
+  16   1              TR0 = 1;
+  17   1              EA  = 1;
+  18   1              ET0 = 1;
+  19   1      }
+  20          void timer0_isr(void) interrupt 1                                                                                                               //中断服务函数                  
+  21          {
+  22   1              TH0 = (65536 - 2000) / 256;
+  23   1              TL0 = (65536 - 2000) % 256;
+  24   1              cp++;
+  25   1              P0 = 0xff;
+  26   1              switch(cp1)
+  27   1              {
+  28   2                      case 0:P3_0 = 0;P0 = 0x01;P3_0  = 1;P3_0 = 0;
+  29   2                      P0 = seven_seg[c];break;
+  30   2                      case 1:P3_0 = 0;P0 = 0x02;P3_0  = 1;P3_0 = 0;
+  31   2                      P0 = seven_seg[t % 10] & 0x7f;break;
+  32   2                      case 2:P3_0 = 0;P0 = 0x04;P3_0  = 1;P3_0 = 0;
+  33   2                      P0 = seven_seg[t / 10];break;
+  34   2              }
+  35   1              cp1++;if(cp1 >= 3)cp1 = 0;
+  36   1      }
+  37          void main(void) 
+  38          {
+  39   1              timer0_init();                                                                                                                          //向18B20的rom中写数据          
+  40   1              while(1)
+  41   1              {
+  42   2                      if(cp >= 500)
+  43   2                      {
+  44   3                              cp = 0;
+  45   3                              Read_Temperature();
+  46   3                              c = c * 0.625;
+  47   3                      }       
+  48   2              }
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    349    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V8.02   MAIN                                                                  07/23/2008 18:36:01 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

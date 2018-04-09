@@ -1,0 +1,145 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        10/23/2016  17:59:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO 8位数码管动态显示
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  8位数码管动态显示 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?MAIN
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0105H     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    0905H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0991H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    09A1H     000CH     UNIT         ?CO?MAIN
+            CODE    09ADH     000AH     UNIT         ?C_INITSEG
+            CODE    09B7H     0005H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   8位数码管动态显示 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0_ISR?MAIN
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/23/2016  17:59:14  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  8位数码管动态显示 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00B0H         PUBLIC        P3
+  C:0800H         PUBLIC        timer0_isr
+  B:00A8H.7       PUBLIC        EA
+  B:00B0H.0       PUBLIC        P3_0
+  C:09B7H         PUBLIC        main
+  D:0089H         PUBLIC        TMOD
+  D:0008H         PUBLIC        sec
+  D:0009H         PUBLIC        hour
+  D:000AH         PUBLIC        min
+  C:09A1H         PUBLIC        seven_seg
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:000BH         PUBLIC        cp
+  B:0088H.4       PUBLIC        TR0
+  D:000DH         PUBLIC        tp
+  C:0991H         PUBLIC        timer0_init
+  -------         PROC          TIMER0_ISR
+  C:0800H         LINE#         11
+  C:080FH         LINE#         13
+  C:0812H         LINE#         14
+  C:0815H         LINE#         15
+  C:081DH         LINE#         16
+  C:0826H         LINE#         17
+  C:0826H         LINE#         18
+  C:082CH         LINE#         19
+  C:082EH         LINE#         20
+  C:0839H         LINE#         21
+  C:0845H         LINE#         22
+  C:084FH         LINE#         23
+  C:084FH         LINE#         24
+  C:0852H         LINE#         25
+  C:087BH         LINE#         26
+  C:087BH         LINE#         27
+  C:0888H         LINE#         28
+  C:0895H         LINE#         29
+  C:089CH         LINE#         30
+  C:08A9H         LINE#         31
+  C:08B6H         LINE#         32
+  C:08C4H         LINE#         33
+  C:08D7H         LINE#         34
+  C:08ECH         LINE#         35
+  C:08ECH         LINE#         36
+  C:08F8H         LINE#         37
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:0991H         LINE#         38
+  C:0991H         LINE#         39
+  C:0991H         LINE#         40
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/23/2016  17:59:14  PAGE 3
+
+
+  C:0994H         LINE#         41
+  C:0997H         LINE#         42
+  C:099AH         LINE#         43
+  C:099CH         LINE#         44
+  C:099EH         LINE#         45
+  C:09A0H         LINE#         46
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:09B7H         LINE#         47
+  C:09B7H         LINE#         48
+  C:09B7H         LINE#         49
+  C:09BAH         LINE#         50
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0132H BYTE (14%) *
+******************************************************************************
+
+Program Size: data=15.0 xdata=0 code=450
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

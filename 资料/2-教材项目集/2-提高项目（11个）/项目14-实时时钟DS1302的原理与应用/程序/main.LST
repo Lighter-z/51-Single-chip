@@ -1,0 +1,163 @@
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 11:39:22 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: G:\单片机软件\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //实时时钟DS1302应用，针对B105型实验开发板设计
+   2          //实时读取时间
+   3          //设计：单片机创新工作室--齐霄涵设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include<ds1302.c>
+   6          unsigned char month,year,date,sec,min,hour,week,d,i,f,d;
+   7          unsigned char cp1,cp2,cp3;                                                                                                      //定义变量
+   8          sbit P1_0 = P1^0;                                                                                                                       //位选数组
+   9          code unsigned char seven_seg[10] = {0xc0,0xf9,0xa4,0xb0,0x99,
+  10                                                                                          0x92,0x82,0xf8,0x80,0x90};                      //数字0~9的显示方法
+  11          bit conv;
+  12          void get_ds1302_time(void)                                                                                                      //获取1302的时间数据（时、分、秒），存入time1数组中
+  13          {
+  14   1              d = read_ds1302_add(0x81);                                                                                              //读秒
+  15   1              sec = BCD_DEC_conv(d);                                                                                                  //得到秒        
+  16   1              d = read_ds1302_add(0x83);                                                                                              //读分
+  17   1              min = BCD_DEC_conv(d);                                                                                                  //得到分
+  18   1              d = read_ds1302_add(0x85);                                                                                              //读小时
+  19   1              hour = BCD_DEC_conv(d);                                                                                                 //得到小时
+  20   1              d = read_ds1302_add(0x87);                                                                                              //读日
+  21   1              date = BCD_DEC_conv(d);                                                                                                 //得到日
+  22   1              d = read_ds1302_add(0x89);                                                                                              //读月
+  23   1              month = BCD_DEC_conv(d);                                                                                                //得到月
+  24   1              d = read_ds1302_add(0x8b);                                                                                              //读星期
+  25   1              week = BCD_DEC_conv(d);                                                                                                 //得到星期
+  26   1              d = read_ds1302_add(0x8d);                                                                                              //读年
+  27   1              year = BCD_DEC_conv(d);                                                                                                 //得到年                
+  28   1      }
+  29          void time0_isr(void) interrupt 1                                                                                        //利用中断对数码管上显示的数据进行刷新
+  30          {
+  31   1              TH0 = (65536 - 2000) / 256;     
+  32   1              TL0 = (65536 - 2000) % 256;
+  33   1              cp1++;
+  34   1              if(cp1 >= 250)                                                                                                                  //0.5秒
+  35   1              {
+  36   2                      cp1 = 0;
+  37   2                      f = ~f;                                                                                                                         //产生小数点闪烁变量
+  38   2                      cp2++;
+  39   2                      if(cp2 >= 5)
+  40   2                      {  
+  41   3                              cp2 = 0;
+  42   3                              conv = ~conv;                                                                                                   //产生交替显示变量      
+  43   3                      }       
+  44   2              }
+  45   1              if(conv == 1)
+  46   1              {
+  47   2                      P0 = 0xff;
+  48   2                      switch(cp3)
+  49   2                      {
+  50   3                                      case 0: P1_0 = 0;P0 = 0x01;P1_0 = 1;P1_0 = 0;                           //P1.0端口高电平允许存储，P1.0为低电平保存存储
+  51   3                                              P0 = seven_seg[sec%10];break;                                           //显示秒个位
+  52   3                                      case 1: 
+  53   3                                                      P1_0 = 0;P0 = 0x02;P1_0 = 1;P1_0 = 0;
+  54   3                                                      P0 = seven_seg[sec/10];break;                                           //显示秒十位
+  55   3                                      case 2: 
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 11:39:22 PAGE 2   
+
+  56   3                                                      P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;           
+  57   3                                                      P0 = seven_seg[min%10] & (0x7f | f);break;                      //显示分个位,并使小数点随秒闪烁
+  58   3                                      case 3: 
+  59   3                                                      P1_0 = 0;P0 = 0x08;P1_0 = 1;P1_0 = 0;
+  60   3                                                      P0 = seven_seg[min/10];break;                                           //显示分十位
+  61   3                                      case 4: 
+  62   3                                                      P1_0 = 0;P0 = 0x10;P1_0 = 1;P1_0 = 0;                   
+  63   3                                                      P0 = seven_seg[hour%10] & (0x7f | f);break;                     //显示时个位，并使小数点随秒闪烁
+  64   3                                      case 5: 
+  65   3                                                      P1_0 = 0;P0 = 0x20;P1_0 = 1;P1_0 = 0;
+  66   3                                                      P0 = seven_seg[hour/10];break;                                          //显示时十位
+  67   3                                      case 6: 
+  68   3                                                      P1_0 = 0;P0 = 0x40;P1_0 = 1;P1_0 = 0;                   
+  69   3                                                      P0 = 0xbf;break;                                                                        //显示“-”
+  70   3                                      case 7: 
+  71   3                                                      P1_0 = 0;P0 = 0x80;P1_0 = 1;P1_0 = 0;
+  72   3                                                      P0 = 0xbf;break;                                                                        //显示“-”
+  73   3                      }
+  74   2              }
+  75   1              else
+  76   1              {       
+  77   2                      P0 = 0xff;
+  78   2                      switch(cp3)
+  79   2                      {
+  80   3                              case 0: 
+  81   3                                              P1_0 = 0;P0 = 0x01;P1_0 = 1;P1_0 = 0;                                   //P1.0端口高电平允许存储，P1.0为低电平保存存储
+  82   3                                              P0 = seven_seg[date%10];break;                                                  //显示天个位
+  83   3                              case 1: 
+  84   3                                              P1_0 = 0;P0 = 0x02;P1_0 = 1;P1_0 = 0;
+  85   3                                              P0 = seven_seg[date/10];break;                                                  //显示天十位
+  86   3                              case 2: 
+  87   3                                              P1_0 = 0;P0 = 0x04;P1_0 = 1;P1_0 = 0;           
+  88   3                                              P0 = seven_seg[month%10] & (0x7f | f);break;                    //显示月个位,并使小数点随秒闪烁
+  89   3                              case 3: 
+  90   3                                              P1_0 = 0;P0 = 0x08;P1_0 = 1;P1_0 = 0;
+  91   3                                              P0 = seven_seg[month/10];break;                                                 //显示月十位
+  92   3                              case 4: 
+  93   3                                              P1_0 = 0;P0 = 0x10;P1_0 = 1;P1_0 = 0;                   
+  94   3                                              P0 = seven_seg[year%10] & (0x7f | f);break;                             //显示年个位，并使小数点随秒闪烁
+  95   3                              case 5: 
+  96   3                                              P1_0 = 0;P0 = 0x20;P1_0 = 1;P1_0 = 0;
+  97   3                                              P0 = seven_seg[year/10];break;                                                  //显示年十位
+  98   3                              case 6: 
+  99   3                                              P1_0 = 0;P0 = 0x40;P1_0 = 1;P1_0 = 0;                   
+ 100   3                                              P0 = seven_seg[0];break;                                                                //显示“0”
+ 101   3                              case 7: 
+ 102   3                                              P1_0 = 0;P0 = 0x80;P1_0 = 1;P1_0 = 0;
+ 103   3                                              P0 = seven_seg[2];break;                                                                //显示“2”
+ 104   3                      }
+ 105   2              }
+ 106   1              cp3++;
+ 107   1              if(cp3 >= 8)cp3 = 0;                    
+ 108   1      }
+ 109          void timer0_init(void)                                                                                                          //Timer0初始化
+ 110          {
+ 111   1              TMOD = 0x01;
+ 112   1              TH0 = (65536 - 2000) / 256;     
+ 113   1              TL0 = (65536 - 2000) % 256;
+ 114   1              TR0 = 1;
+ 115   1              ET0 = 1;
+ 116   1              EA  = 1;
+ 117   1      }
+C51 COMPILER V8.02   MAIN                                                                  01/16/2016 11:39:22 PAGE 3   
+
+ 118          void main(void)
+ 119          {
+ 120   1              uchar i = 46;                                                                                                                   //举例，比如要调整时间，分钟设定为46分
+ 121   1              i = DEC_BCD_conv(i);
+ 122   1              timer0_init();
+ 123   1              write_ds1302_add_dat(0x8e,0x00);                                                                                //写操作，可以对DS1302调整
+ 124   1              write_ds1302_add_dat(0x80,0x30);                                                                                //写秒，30秒
+ 125   1              write_ds1302_add_dat(0x82,i);                                                                                   //写分，46分
+ 126   1              write_ds1302_add_dat(0x84,0x12);                                                                                //写时，12时
+ 127   1              write_ds1302_add_dat(0x86,0x28);                                                                                //写日，28日
+ 128   1              write_ds1302_add_dat(0x88,0x05);                                                                                //写月，5月 
+ 129   1              write_ds1302_add_dat(0x8a,0x03);                                                                                //写星期，星期三
+ 130   1              write_ds1302_add_dat(0x8c,0x12);                                                                                //写年，（20）12年
+ 131   1              write_ds1302_add_dat(0x8e,0x80);                                                                                //写保护
+ 132   1              while(1)
+ 133   1              {
+ 134   2                      get_ds1302_time();
+ 135   2              }
+ 136   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    693    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

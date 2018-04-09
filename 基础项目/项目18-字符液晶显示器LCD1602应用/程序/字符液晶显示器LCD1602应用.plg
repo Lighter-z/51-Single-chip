@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\赵铭\项目\项目18-字符液晶显示器LCD1602应用\程序\字符液晶显示器LCD1602应用.uvproj
+Project File Date:  05/21/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=22.0 xdata=0 code=486
+creating hex file from "字符液晶显示器LCD1602应用"...
+"字符液晶显示器LCD1602应用" - 0 Error(s), 0 Warning(s).

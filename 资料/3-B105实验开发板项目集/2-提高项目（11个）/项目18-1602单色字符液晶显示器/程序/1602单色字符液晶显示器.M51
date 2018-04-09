@@ -1,0 +1,235 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        01/16/2016  12:01:34  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+G:\单片机软件\KEIL\C51\BIN\BL51.EXE main.obj TO 1602单色字符液晶显示器
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  G:\单片机软件\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  1602单色字符液晶显示器 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000BH     UNIT         ?DT?MAIN
+            IDATA   0013H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     002AH     UNIT         ?PR?MAIN?MAIN
+            CODE    00B9H     001EH     UNIT         ?PR?_DISPLAY_NUM?MAIN
+            CODE    00D7H     001BH     UNIT         ?CO?MAIN
+            CODE    00F2H     0019H     UNIT         ?C?LIB_CODE
+            CODE    010BH     0017H     UNIT         ?PR?_SEND1?MAIN
+            CODE    0122H     0016H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0138H     0015H     UNIT         ?PR?_WRITE_COMMAND?MAIN
+            CODE    014DH     0015H     UNIT         ?PR?_WRITE_DATA?MAIN
+            CODE    0162H     0015H     UNIT         ?PR?_GOTOXY?MAIN
+            CODE    0177H     0014H     UNIT         ?PR?FLCD1602_INIT?MAIN
+            CODE    018BH     0013H     UNIT         ?PR?_DISPLAY_STRING?MAIN
+            CODE    019EH     000EH     UNIT         ?C_INITSEG
+            CODE    01ACH     000AH     UNIT         ?PR?FLCD1602_CLEAR?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   1602单色字符液晶显示器 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?FLCD1602_INIT?MAIN
+  +--> ?PR?FLCD1602_CLEAR?MAIN
+  +--> ?PR?_GOTOXY?MAIN
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:01:34  PAGE 2
+
+
+  +--> ?CO?MAIN
+  +--> ?PR?_DISPLAY_STRING?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?FLCD1602_INIT?MAIN
+  +--> ?PR?_WRITE_COMMAND?MAIN
+
+?PR?_WRITE_COMMAND?MAIN
+  +--> ?PR?_SEND1?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+?PR?FLCD1602_CLEAR?MAIN
+  +--> ?PR?_WRITE_COMMAND?MAIN
+
+?PR?_GOTOXY?MAIN
+  +--> ?PR?_WRITE_COMMAND?MAIN
+
+?PR?_DISPLAY_STRING?MAIN
+  +--> ?PR?_WRITE_DATA?MAIN
+
+?PR?_WRITE_DATA?MAIN
+  +--> ?PR?_SEND1?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  1602单色字符液晶显示器 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:014DH         PUBLIC        _write_data
+  C:00B9H         PUBLIC        _display_num
+  C:0162H         PUBLIC        _gotoxy
+  B:0080H.3       PUBLIC        RS
+  C:008FH         PUBLIC        main
+  B:0080H.4       PUBLIC        RW
+  C:010BH         PUBLIC        _send1
+  B:0080H.2       PUBLIC        SH_CP1
+  B:0080H.5       PUBLIC        E
+  B:0080H.0       PUBLIC        DS1
+  B:0080H.1       PUBLIC        ST_CP1
+  C:01ACH         PUBLIC        FLCD1602_clear
+  D:0008H         PUBLIC        num
+  C:0138H         PUBLIC        _write_command
+  C:018BH         PUBLIC        _display_string
+  C:012DH         PUBLIC        _delay
+  C:0177H         PUBLIC        FLCD1602_init
+  -------         PROC          _SEND1
+  D:0007H         SYMBOL        x
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:010BH         LINE#         7
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:01:34  PAGE 3
+
+
+  C:010BH         LINE#         8
+  C:010BH         LINE#         10
+  C:010DH         LINE#         11
+  C:010DH         LINE#         12
+  C:010FH         LINE#         13
+  C:0113H         LINE#         14
+  C:0117H         LINE#         15
+  C:0119H         LINE#         16
+  C:011DH         LINE#         17
+  C:011FH         LINE#         18
+  C:0121H         LINE#         19
+  -------         ENDPROC       _SEND1
+  -------         PROC          L?0025
+  -------         ENDPROC       L?0025
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:012DH         LINE#         4
+  C:012DH         LINE#         5
+  C:012DH         LINE#         6
+  C:0137H         LINE#         7
+  -------         ENDPROC       _DELAY
+  -------         PROC          _WRITE_COMMAND
+  D:0007H         SYMBOL        command
+  C:0138H         LINE#         13
+  C:0138H         LINE#         14
+  C:0138H         LINE#         15
+  C:0141H         LINE#         16
+  C:0148H         LINE#         17
+  C:014AH         LINE#         18
+  C:014CH         LINE#         19
+  -------         ENDPROC       _WRITE_COMMAND
+  -------         PROC          _WRITE_DATA
+  D:0007H         SYMBOL        date
+  C:014DH         LINE#         21
+  C:014DH         LINE#         22
+  C:014DH         LINE#         23
+  C:0156H         LINE#         24
+  C:015DH         LINE#         25
+  C:015FH         LINE#         26
+  C:0161H         LINE#         27
+  -------         ENDPROC       _WRITE_DATA
+  -------         PROC          FLCD1602_INIT
+  C:0177H         LINE#         29
+  C:0177H         LINE#         30
+  C:0177H         LINE#         31
+  C:017CH         LINE#         32
+  C:0181H         LINE#         33
+  C:0186H         LINE#         34
+  -------         ENDPROC       FLCD1602_INIT
+  -------         PROC          FLCD1602_CLEAR
+  C:01ACH         LINE#         37
+  C:01ACH         LINE#         38
+  C:01ACH         LINE#         39
+  C:01B1H         LINE#         40
+  -------         ENDPROC       FLCD1602_CLEAR
+  -------         PROC          _DISPLAY_STRING
+  D:0001H         SYMBOL        p
+BL51 BANKED LINKER/LOCATER V6.00                                                      01/16/2016  12:01:34  PAGE 4
+
+
+  C:018BH         LINE#         43
+  C:018BH         LINE#         44
+  C:018BH         LINE#         45
+  C:0191H         LINE#         46
+  C:0191H         LINE#         47
+  C:0194H         LINE#         48
+  C:019BH         LINE#         49
+  C:019DH         LINE#         50
+  -------         ENDPROC       _DISPLAY_STRING
+  -------         PROC          _DISPLAY_NUM
+  D:0005H         SYMBOL        x
+  C:00B9H         LINE#         52
+  C:00BBH         LINE#         53
+  C:00BBH         LINE#         54
+  C:00C8H         LINE#         55
+  -------         ENDPROC       _DISPLAY_NUM
+  -------         PROC          _GOTOXY
+  D:0006H         SYMBOL        y
+  D:0005H         SYMBOL        x
+  C:0162H         LINE#         58
+  C:0164H         LINE#         59
+  C:0164H         LINE#         60
+  C:0167H         LINE#         61
+  C:016CH         LINE#         62
+  C:0176H         LINE#         63
+  -------         ENDPROC       _GOTOXY
+  -------         PROC          MAIN
+  C:008FH         LINE#         10
+  C:008FH         LINE#         11
+  C:008FH         LINE#         12
+  C:0092H         LINE#         13
+  C:0095H         LINE#         14
+  C:0095H         LINE#         15
+  C:0095H         LINE#         16
+  C:009CH         LINE#         17
+  C:00A5H         LINE#         18
+  C:00AAH         LINE#         19
+  C:00B1H         LINE#         20
+  C:00B7H         LINE#         21
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?CLDPTR
+  C:00F2H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY_NUM?MAIN
+
+Program Size: data=20.0 xdata=0 code=438
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

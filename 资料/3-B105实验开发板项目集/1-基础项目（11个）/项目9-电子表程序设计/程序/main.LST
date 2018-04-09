@@ -1,0 +1,86 @@
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 18:38:03 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //电子表设计
+   2          //利用4个按键调整时间
+   3          //具有定闹功能
+   4          //设计者，河南科技学院单片机协会，2016年10月
+   5          #include<reg51.h>
+   6          #include<display.c>
+   7          #include<key.c>
+   8          unsigned int cp1;
+   9          unsigned char cp2;
+  10          sbit P1_2 = P1^2;
+  11          void timer0_isr(void) interrupt 1
+  12          {
+  13   1              TH0 = (65536 - 1000) / 256;
+  14   1              TL0 = (65536 - 1000) % 256;
+  15   1              cp1++;
+  16   1              if(cp1  >= 500)
+  17   1              {
+  18   2                      cp1 = 0;
+  19   2                      flash = ~flash;
+  20   2                      cp2++;
+  21   2              }
+  22   1              if(cp2 >= 2)
+  23   1              {
+  24   2                      cp2 = 0;
+  25   2                      sec++;
+  26   2                      if(sec >= 60){sec = 0;min++;}
+  27   2                      if(min >= 60){min = 0;hour++;}
+  28   2                      if(hour >= 24)hour = 0;
+  29   2              }
+  30   1              P0 = 0xff;
+  31   1              switch(mode)
+  32   1              {
+  33   2                      case 0:dis_play0();break;
+  34   2                      case 1:dis_play1();break;
+  35   2                      case 2:dis_play2();break;
+  36   2                      case 3:dis_play3();break;
+  37   2                      case 4:dis_play4();break;
+  38   2                      case 5:dis_play5();break;
+  39   2              }
+  40   1              cp3++;
+  41   1              if(cp3 >= 8)cp3 = 0;
+  42   1      }
+  43          void timer0_init(void)
+  44          {
+  45   1              TMOD = 0x01;
+  46   1              TH0 = (65536 - 1000) / 256;
+  47   1              TL0 = (65536 - 1000) % 256;
+  48   1              EA = 1;
+  49   1              ET0 = 1;
+  50   1              TR0 =1;
+  51   1      }
+  52          void main(void)
+  53          {
+  54   1              timer0_init();
+  55   1              while(1)
+C51 COMPILER V8.02   MAIN                                                                  10/23/2016 18:38:03 PAGE 2   
+
+  56   1              {
+  57   2                      key();
+  58   2                      if(hour == hour_n && min == min_n)P1_2 = 0;
+  59   2                      else P1_2 = 1;                                                  
+  60   2              }
+  61   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1505    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,145 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/07/2017  17:06:01  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\°²×°Ä¿Â¼\KEIL4\C51\BIN\BL51.EXE 4x4°´¼ü¾ØÕó.obj TO 4x4°´¼ü¾ØÕó
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  4x4°´¼ü¾ØÕó.obj (4X4_´¼ü¾ØÕ_)
+  D:\°²×°Ä¿Â¼\KEIL4\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  4x4°´¼ü¾ØÕó (4X4_´¼ü¾ØÕ_)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008FH     UNIT         ?PR?KEY_SCAN?4X4_´¼ü¾ØÕ_
+            CODE    0092H     0032H     UNIT         ?CO?4X4_´¼ü¾ØÕ_
+            CODE    00C4H     0021H     UNIT         ?PR?_DISPLAY?4X4_´¼ü¾ØÕ_
+            CODE    00E5H     0012H     UNIT         ?PR?_DELAY?4X4_´¼ü¾ØÕ_
+            CODE    00F7H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0103H     0008H     UNIT         ?PR?MAIN?4X4_´¼ü¾ØÕ_
+
+
+
+OVERLAY MAP OF MODULE:   4x4°´¼ü¾ØÕó (4X4_´¼ü¾ØÕ_)
+
+
+SEGMENT                            DATA_GROUP 
+  +--> CALLED SEGMENT            START    LENGTH
+------------------------------------------------
+?C_C51STARTUP                    -----    -----
+  +--> ?PR?MAIN?4X4_´¼ü¾ØÕ_
+
+?PR?MAIN?4X4_´¼ü¾ØÕ_             -----    -----
+  +--> ?PR?KEY_SCAN?4X4_´¼ü¾ØÕ_
+  +--> ?PR?_DISPLAY?4X4_´¼ü¾ØÕ_
+
+?PR?KEY_SCAN?4X4_´¼ü¾ØÕ_         0008H    0002H
+  +--> ?CO?4X4_´¼ü¾ØÕ_
+  +--> ?PR?_DELAY?4X4_´¼ü¾ØÕ_
+
+?PR?_DISPLAY?4X4_´¼ü¾ØÕ_         -----    -----
+  +--> ?CO?4X4_´¼ü¾ØÕ_
+  +--> ?PR?_DELAY?4X4_´¼ü¾ØÕ_
+
+
+
+SYMBOL TABLE OF MODULE:  4x4°´¼ü¾ØÕó (4X4_´¼ü¾ØÕ_)
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/07/2017  17:06:01  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        4X4_´¼ü¾ØÕ_
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0092H         PUBLIC        P1_scan
+  C:00ECH         PUBLIC        _delay
+  C:0103H         PUBLIC        main
+  C:00BAH         PUBLIC        seven_seg
+  C:0003H         PUBLIC        key_scan
+  C:009AH         PUBLIC        key_temp_value
+  C:00C4H         PUBLIC        _display
+  -------         PROC          L?0024
+  -------         ENDPROC       L?0024
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        x
+  C:00ECH         LINE#         9
+  C:00ECH         LINE#         10
+  C:00ECH         LINE#         11
+  C:00F6H         LINE#         12
+  -------         ENDPROC       _DELAY
+  -------         PROC          KEY_SCAN
+  -------         DO            
+  D:0002H         SYMBOL        i
+  D:0008H         SYMBOL        j
+  -------         ENDDO         
+  C:0003H         LINE#         13
+  C:0003H         LINE#         14
+  C:0003H         LINE#         16
+  C:0006H         LINE#         17
+  C:0006H         LINE#         18
+  C:001FH         LINE#         19
+  C:0027H         LINE#         20
+  C:0027H         LINE#         21
+  C:002EH         LINE#         22
+  C:004BH         LINE#         23
+  C:004BH         LINE#         24
+  C:0050H         LINE#         25
+  C:0050H         LINE#         26
+  C:0070H         LINE#         27
+  C:0073H         LINE#         28
+  C:0081H         LINE#         29
+  C:0081H         LINE#         30
+  C:0081H         LINE#         31
+  C:008FH         LINE#         32
+  C:0091H         LINE#         33
+  -------         ENDPROC       KEY_SCAN
+  -------         PROC          _DISPLAY
+  D:0005H         SYMBOL        i
+  C:00C4H         LINE#         34
+  C:00C6H         LINE#         35
+  C:00C6H         LINE#         36
+  C:00D3H         LINE#         37
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/07/2017  17:06:01  PAGE 3
+
+
+  C:00D6H         LINE#         38
+  C:00DEH         LINE#         39
+  C:00E1H         LINE#         40
+  C:00E4H         LINE#         41
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0003H         SYMBOL        i
+  -------         ENDDO         
+  C:0103H         LINE#         42
+  C:0103H         LINE#         43
+  C:0103H         LINE#         45
+  C:0103H         LINE#         46
+  C:0103H         LINE#         47
+  C:0106H         LINE#         48
+  C:0109H         LINE#         49
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        4X4_´¼ü¾ØÕ_
+
+Program Size: data=11.0 xdata=0 code=267
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

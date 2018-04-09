@@ -1,0 +1,41 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+H:\2015年开发实验板学习资料\2-教材项目集\2-提高项目（11个）\项目15 -AD转换器应用\项目15-2 AD转换器TLC549应用\程序\AD转换器TLC549应用.uv2
+Project File Date:  12/18/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(46): warning C206: 'tlc549_init': missing function-prototype
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  TLC549_INIT
+    MODULE:  main.obj (MAIN)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  TLC549_INIT
+    MODULE:  main.obj (MAIN)
+    ADDRESS: 095DH
+Program Size: data=13.0 xdata=0 code=359
+creating hex file from "AD转换器TLC549应用"...
+"AD转换器TLC549应用" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=13.0 xdata=0 code=356
+creating hex file from "AD转换器TLC549应用"...
+"AD转换器TLC549应用" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=13.0 xdata=0 code=354
+creating hex file from "AD转换器TLC549应用"...
+"AD转换器TLC549应用" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=13.0 xdata=0 code=861
+creating hex file from "AD转换器TLC549应用"...
+"AD转换器TLC549应用" - 0 Error(s), 0 Warning(s).

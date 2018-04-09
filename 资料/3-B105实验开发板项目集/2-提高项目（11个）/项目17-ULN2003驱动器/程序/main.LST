@@ -1,0 +1,42 @@
+C51 COMPILER V8.02   MAIN                                                                  01/17/2016 11:35:53 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //ULN2003驱动器教材和B105型实验开发板通用
+   2          //key1_falg控制电机正转  key2_flag控制电机反转 key3_flag控制电机停止
+   3          //设计：单片机创新工作室--王曙光设计，2015年12月15日
+   4          #include<reg51.h>
+   5          #include <key.c>
+   6          #include <moto.c>
+   7          void main(void)
+   8          { 
+   9   1              while(1)
+  10   1          {  
+  11   2              key_scan();
+  12   2                      if(key1_flag == 1)
+  13   2                              motor_ffw();                    //电机正转
+  14   2                      if(key2_flag == 1)
+  15   2                              motor_rev();                    //电机反转
+  16   2              if(key3_flag == 1) 
+  17   2                              P2 = 0x0f;                              //电机停止
+  18   2              }
+  19   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    193    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

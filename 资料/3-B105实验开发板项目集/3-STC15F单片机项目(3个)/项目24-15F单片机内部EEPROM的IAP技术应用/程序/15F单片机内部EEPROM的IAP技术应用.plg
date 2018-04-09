@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+I:\项目集\3-STC15F单片机项目(3个)\项目24-15F单片机内部EEPROM的IAP技术应用\程序\15F单片机内部EEPROM的IAP技术应用.uv2
+Project File Date:  12/18/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=14.0 xdata=7 code=679
+creating hex file from "15F单片机内部EEPROM的IAP技术应用"...
+"15F单片机内部EEPROM的IAP技术应用" - 0 Error(s), 0 Warning(s).

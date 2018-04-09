@@ -1,0 +1,161 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        07/24/2016  16:26:35  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO 单片机PWM波输出及其应用
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  单片机PWM波输出及其应用 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         ?DT?MAIN
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0002H     UNIT         ?XD?MAIN
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     002FH     UNIT         ?PR?TIMER0_ISR?MAIN
+            CODE    08BBH     001EH     UNIT         ?PR?STC_PWM_INIT?MAIN
+            CODE    08D9H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    08E9H     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    08F1H     0007H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   单片机PWM波输出及其应用 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+  +--> ?PR?STC_PWM_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  单片机PWM波输出及其应用 (MAIN)
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/24/2016  16:26:35  PAGE 2
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:088CH         PUBLIC        timer0_isr
+  D:0008H         PUBLIC        cp1
+  D:0009H         PUBLIC        cp2
+  B:00A8H.7       PUBLIC        EA
+  D:00F9H         PUBLIC        CH
+  D:00E9H         PUBLIC        CL
+  D:00FAH         PUBLIC        CCAP0H
+  D:00FBH         PUBLIC        CCAP1H
+  D:00FCH         PUBLIC        CCAP2H
+  D:00DAH         PUBLIC        CCAPM0
+  D:00DBH         PUBLIC        CCAPM1
+  D:00DCH         PUBLIC        CCAPM2
+  D:00D9H         PUBLIC        CMOD
+  D:00D8H         PUBLIC        CCON
+  C:08E9H         PUBLIC        main
+  X:0000H         PUBLIC        pwm_s
+  D:0089H         PUBLIC        TMOD
+  D:000AH         PUBLIC        pwm_num0
+  C:08BBH         PUBLIC        STC_pwm_init
+  D:000BH         PUBLIC        pwm_num1
+  D:000CH         PUBLIC        pwm_num2
+  D:00A2H         PUBLIC        AUXR
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00F2H         PUBLIC        PCA_PMW0
+  D:00F3H         PUBLIC        PCA_PMW1
+  D:00F4H         PUBLIC        PCA_PMW2
+  C:08D9H         PUBLIC        timer0_init
+  -------         PROC          STC_PWM_INIT
+  C:08BBH         LINE#         22
+  C:08BBH         LINE#         23
+  C:08BBH         LINE#         24
+  C:08BEH         LINE#         25
+  C:08C1H         LINE#         26
+  C:08C4H         LINE#         27
+  C:08C6H         LINE#         29
+  C:08C8H         LINE#         30
+  C:08CBH         LINE#         32
+  C:08CDH         LINE#         33
+  C:08D0H         LINE#         35
+  C:08D2H         LINE#         36
+  C:08D5H         LINE#         37
+  C:08D8H         LINE#         38
+  -------         ENDPROC       STC_PWM_INIT
+  -------         PROC          TIMER0_ISR
+  C:088CH         LINE#         8
+  C:0890H         LINE#         10
+  C:0893H         LINE#         11
+  C:0896H         LINE#         12
+BL51 BANKED LINKER/LOCATER V6.00                                                      07/24/2016  16:26:35  PAGE 3
+
+
+  C:0898H         LINE#         13
+  C:089FH         LINE#         14
+  C:089FH         LINE#         15
+  C:08A1H         LINE#         16
+  C:08AAH         LINE#         17
+  C:08ADH         LINE#         18
+  C:08ADH         LINE#         19
+  C:08B0H         LINE#         20
+  C:08B3H         LINE#         21
+  C:08B6H         LINE#         22
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          TIMER0_INIT
+  C:08D9H         LINE#         23
+  C:08D9H         LINE#         24
+  C:08D9H         LINE#         25
+  C:08DCH         LINE#         26
+  C:08DFH         LINE#         27
+  C:08E2H         LINE#         28
+  C:08E4H         LINE#         29
+  C:08E6H         LINE#         30
+  C:08E8H         LINE#         31
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          MAIN
+  C:08E9H         LINE#         32
+  C:08E9H         LINE#         33
+  C:08E9H         LINE#         34
+  C:08ECH         LINE#         35
+  C:08EFH         LINE#         36
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 006EH BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=14.0 xdata=2 code=254
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
